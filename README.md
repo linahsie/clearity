@@ -1,5 +1,5 @@
 # MP #2: [Title]
-### Due: [Due Date], 11.59PM CDT
+### Due: October 9th, 2017, 11.59PM CDT
 
 ## Table of Contents
 1. [Assignment](#assignment)
