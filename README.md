@@ -33,7 +33,7 @@ Lorem Ipsem
 
 ## Environment Setup Guide
 1. Clone the repository:
-`git clone https://github.com/uiuc-web-programming/mp2_starter_17.git mp2`, then `cd mp1`
+`git clone https://github.com/uiuc-web-programming/mp2_starter_17.git mp2`, then `cd mp2`
 2. Install dependencies:
 `npm install`
 3. Run the dev server:
