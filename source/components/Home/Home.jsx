@@ -10,16 +10,9 @@ class Home extends Component {
         return(
             <div className="Home">
                 <h1>Welcome to MP2!</h1>
-
-                <Link to="/example">
-                    <Button>
-                        Click here to see an example route
-                    </Button>
-                </Link>
             </div>
         )
     }
-
 }
 
 export default Home
