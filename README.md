@@ -27,6 +27,12 @@ Your app should have the following features:
   - **A list view**:  where users can input a search query and the app returns a list of results that match the query (i.e. searching movies or albums). There should also be a way to sort the search results based on different properties of the results (such as the name or rank) and of specifying an ordering (ascending and descending). Also, the search bar should filter as you type. You can sort and filter in the client side.
   - **A gallery view**: that displays some kind of image media from the chosen API (gallery of movie posters). The gallery view should also have some kind filtering attribute where users can select one or many attributes and filter the gallery by them (i.e. genres of films or music). 
   -  **A detail view**: When an item in the search view or the gallery view is clicked, the app should display the different attributes of the selected item. Also, this view should have previous and next buttons (can be implemented with arrows) that lets the user cycle through the list of objects.
+  
+You will also be required to use following tools:
+  - Use <code>react-router-dom</code> for routing.
+  - Use <code>Axios</code> for API calls.
+  - Use <code>SemanticUI</code> for frontend design
+  - Use <code>PropTypes</code> for relevant components. https://facebook.github.io/react/docs/typechecking-with-proptypes.html
 
 ## Grading Breakdown
 Total Points : 50
@@ -53,10 +59,7 @@ Other:
 
 ## Tips
   - Start early! This is first MP that uses React so start ahead.
-  - Use <code>react-router-dom</code> for routing.
-  - Use <code>Axios</code> for API calls.
-  - Use <code>SemanticUI</code> for frontend design
-  - Use <code>PropTypes</code> for relevant components. https://facebook.github.io/react/docs/typechecking-with-proptypes.html
+  - Please DO NOT delete the gitignore file from the project
 
 ## Rules
 1. This is an individual assignment. No collaboration is permitted.
