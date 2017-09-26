@@ -12,7 +12,7 @@
 ## Assignment
 
 #### Task
-In this programming assignment, you will implement a front-end interface using React that consumes an API.Please read through the entire MP before you start.
+In this programming assignment, you will implement a front-end interface using React that consumes an API. Please read through the entire MP before you start.
 
 Here is a video demo for a [sample application](https://youtu.be/DmDZuAr7QJE).
 
