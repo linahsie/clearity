@@ -4,7 +4,7 @@
 ## Table of Contents
 1. [Assignment](#assignment)
 2. [Grading Breakdown](#grading-breakdown)
-3. [Tips] (#tips)
+3. [Tips](#tips)
 4. [Rules](#rules)
 5. [Environment Setup Guide](#environment-setup-guide)
 6. [Submission Details](#submission-details)
