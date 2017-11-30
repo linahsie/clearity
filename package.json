@@ -1,5 +1,5 @@
 {
-  "name": "uiucwp_fa17",
+  "name": "Clearity",
   "version": "1.0.0",
   "description": "",
   "main": "index.jsx",
@@ -8,7 +8,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server --content-base public/ --history-api-fallback"
   },
-  "author": "Simon Lu",
+  "author": "Lina Sie, Sarah Liu, Ignatius Ho",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^6.7.7",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "react-materialize": "^1.1.0",
     "normalize.css": "^6.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
