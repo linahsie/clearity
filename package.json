@@ -1,12 +1,12 @@
 {
   "name": "Clearity",
   "version": "1.0.0",
-  "description": "",
+  "description": "Clearity is a platform to streamline in-class communication between students and educators",
   "main": "index.jsx",
   "scripts": {
     "watch": "webpack -d --watch",
     "build": "webpack",
-    "start": "nodemon --use_strict dev_server.js",
+    "start": "nodemon --use_strict index.js",
     "dev": "webpack-dev-server --config webpack.dev.config.js --content-base public/ --history-api-fallback --port 8000"
   },
   "repository": {
@@ -47,10 +47,10 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prop-types": "^15.6.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "^4.0.0",
-    "react-router-dom": "^4.0.0",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^3.0.2",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.76.0",
