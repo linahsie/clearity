@@ -6,7 +6,11 @@
   "scripts": {
     "watch": "webpack -d --watch",
     "build": "webpack",
-    "dev": "webpack-dev-server --content-base public/ --history-api-fallback"
+    "dev": "webpack-dev-server --config webpack.dev.config.js --content-base public/ --history-api-fallback"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linahsie/clearity.git"
   },
   "author": "Lina Sie, Sarah Liu, Ignatius Ho",
   "license": "ISC",
@@ -27,13 +31,22 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "react-materialize": "^1.1.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.3",
     "normalize.css": "^6.0.0",
+    "jsonwebtoken": "^8.1.0",
+    "material-ui": "^0.19.4",
+    "mongoose": "^4.13.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.74.2"
+    "semantic-ui-react": "^0.74.2",
+    "validator": "^9.1.1"
   }
 }
