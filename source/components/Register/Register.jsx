@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import styles from './Register.scss'
+import * as _CONFIG from '../_config/Config.js'
 
 
 class Register extends Component {
@@ -35,7 +36,7 @@ class Register extends Component {
 
         // create an AJAX POST request (This should probably done with Axios instead)
         const xhr = new XMLHttpRequest();
-        xhr.open('post', 'http://localhost:3000/api/register');
+        xhr.open('post', _CONFIG.devURL);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {

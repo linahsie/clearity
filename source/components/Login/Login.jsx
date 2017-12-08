@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import styles from './Login.scss'
+import * as _CONFIG from '../_config/Config.js'
 
 class Login extends Component {
 
@@ -33,7 +34,7 @@ class Login extends Component {
 
         // create an AJAX request (This should probably done with Axios instead)
         const xhr = new XMLHttpRequest();
-        xhr.open('post', 'http://localhost:3000/api/login');
+        xhr.open('post', _CONFIG.devURL);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
