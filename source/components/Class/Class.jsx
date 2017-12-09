@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Menu, Container, Button, Card, Image, Icon } from 'semantic-ui-react'
+import { Header, Menu, Container, Button, Card, Image, Icon, TextArea } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import styles from './Class.scss'
 
 class Class extends Component {
+
+    // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
+    constructor(){
+        super();
+        this.state = {
+            classId: ""
+        }
+    }
+
+    askQuestion = (event) => {
+        event.preventDefault();
+    }
+
     render() {
         return(
             <div>
@@ -26,6 +39,14 @@ class Class extends Component {
                         </Menu.Item>
                     </Container>
                 </Menu>
+                <Container className="questionSection">
+                    <h3>Ask A Question</h3>
+                    <TextArea className="question" placeholder='Your Question Here...' autoHeight rows={3} />
+                    <br></br>
+                    <Button className="submit">
+                        Submit
+                    </Button>
+                </Container>
             </div>
         )
     }
