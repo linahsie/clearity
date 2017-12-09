@@ -22,13 +22,13 @@ class Dashboard extends Component {
 
     render() {
         const { activeItem } = this.state
-        
+
         return(
             <div>
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to="/login" className="left">
+                          <Link to="/" className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
@@ -42,7 +42,7 @@ class Dashboard extends Component {
                         </Menu.Item>
                     </Container>
                 </Menu>
-                
+
                 <Container>
                     <Card.Group>
                         <Card>
