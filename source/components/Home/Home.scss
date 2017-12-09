@@ -11,6 +11,12 @@
 }
 #theme-blue{
 	background-color: #48E0CD;
+	color: white;
+}
+#theme-white{
+	background-color: #FFFFFF;
+	color: #3c4e52;	//dark gray
+	border: 1px solid #ccd3db; //light gray
 }
 #title-clearity{
 	font-size: 60px;
@@ -18,6 +24,7 @@
 #logo{
 	color:#48E0CD !important;
 	font-size: 30px;
+	font-weight: bold;
 }
 .landing-image{
     background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/intersection.png') !important;

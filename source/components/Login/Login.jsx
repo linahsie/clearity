@@ -39,9 +39,8 @@ class Login extends Component {
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
-                this.setState({
-                    message: 'Successfully logged in!'
-                })
+                location.href = '/dashboard';
+
             } else {
                 this.setState({
                     message: 'Incorrect name or password'
@@ -85,22 +84,20 @@ class Login extends Component {
                   </div>
                 </div>
                 <form className="Login" action="/" onSubmit={this.onSubmit}>
-            <Card className="Login__content">
-                <div>
-                    <h1>Login</h1>
-                    <Input label="Email" onChange={this.onChangeEmail} />
-                    <br/><br/>
-                    <Input label="Password" onChange={this.onChangePassword} />
-                    <br/><br/>
+                    <Card className="Login__content">
+                        <div>
+                            <h1>Login</h1>
+                            <Input label="Email" onChange={this.onChangeEmail} />
+                            <br/><br/>
+                            <Input label="Password" onChange={this.onChangePassword} />
+                            <br/><br/>
 
-                    <p>{this.state.message}</p>
-                    <Input type="submit" />
-                    <h4>No account yet? Click <Link to="/register">here</Link> to Register!</h4>
-
-                    <Link to="/dashboard"><p>Go to Dashboard</p></Link>
-                </div>
-            </Card>
-        </form>
+                            <p>{this.state.message}</p>
+                            <Input type="submit" id="theme-blue"/>
+                            <h4>No account yet? Click <Link to="/register">here</Link> to Register!</h4>
+                        </div>
+                    </Card>
+                </form>
               </div>
             </div>
 
