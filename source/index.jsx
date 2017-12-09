@@ -8,7 +8,7 @@ import Home from './components/Home/Home.jsx';
 import Login from './components/Login/Login.jsx';
 import Register from './components/Register/Register.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
-import Classes from './components/Class/Classes.jsx';
+import Class from './components/Class/Class.jsx';
 
 // Include any new stylesheets here
 // Note that components' stylesheets should NOT be included here.
@@ -22,7 +22,7 @@ render(
             <Route  path="/login" component={Login}/>
             <Route  path="/register" component={Register}/>
             <Route  path="/dashboard" component={Dashboard}/>
-            <Route  path = "/class" component={Classes}/>
+            <Route  path = "/class" component={Class}/>
         </Switch>
     </Router>,
     document.getElementById('app')
