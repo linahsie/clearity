@@ -19,10 +19,10 @@ render(
     <Router>
         <Switch>
             <Route exact path="/" component={Home}/>
-            <Route  path="/login" component={Login}/>
-            <Route  path="/register" component={Register}/>
-            <Route  path="/dashboard" component={Dashboard}/>
-            <Route  path = "/class" component={Class}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/dashboard" component={Dashboard}/>
+            <Route path = "/class" component={Class}/>
         </Switch>
     </Router>,
     document.getElementById('app')
