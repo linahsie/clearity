@@ -1,9 +1,14 @@
-.questionSection{
+@mixin containerCommons(){
     text-align: center;
     h3{
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+.questionSection{
+    @include containerCommons;
+    margin: 2% 0 2% 0;
     .question{
         font-size: 1.25em;
         border-radius: 5px;
@@ -12,4 +17,16 @@
     .submit{
         margin: 2% 0;
     }
+}
+
+.questionList{
+    @include containerCommons;
+}
+
+.questionsTable{
+    border-radius: 5px !important;
+}
+
+.tableHeader{
+    text-align: center;
 }
