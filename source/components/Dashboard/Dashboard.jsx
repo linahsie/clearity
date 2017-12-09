@@ -73,11 +73,21 @@ class Dashboard extends Component {
                                 </div>
                             </Card.Content>
                         </Card>
-                        <Card>
-                            <Card.Content>
-                                <Icon name='plus'/>
-                                <Card.Header>Create a class</Card.Header>
-                            </Card.Content>
+                        <Card raised>
+                            <Link to="/createClass">
+                                <Card.Content textAlign="center" className="add-create">
+                                    <Icon name='plus' color="grey"/>
+                                    <Header as='h3' color="grey">Create a class</Header>
+                                </Card.Content>
+                            </Link>
+                        </Card>
+                        <Card raised>
+                            <Link to="/addClass">
+                                <Card.Content textAlign="center" className="add-create">
+                                    <Icon name='plus' color="grey"/>
+                                    <Header as='h3' color="grey">Add a class</Header>
+                                </Card.Content>
+                            </Link>
                         </Card>
                   </Card.Group>
                 </Container>
