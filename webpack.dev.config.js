@@ -31,7 +31,8 @@ const config = {
                 include : APP_DIR,
                 loader : 'babel-loader',
                 query: {
-                    presets: ['es2015']
+                    presets: ['es2015'],
+                    plugins: ['transform-class-properties']
                 }
             },
 

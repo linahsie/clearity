@@ -1,0 +1,41 @@
+@mixin containerCommons(){
+    text-align: center;
+    h3{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.questionSection{
+    @include containerCommons;
+    margin: 2% 0 2% 0;
+    .question{
+        font-size: 1.25em;
+        border-radius: 5px;
+        width: 80%;
+    }
+    .submit{
+        margin: 2% 0;
+    }
+}
+
+.questionList{
+    @include containerCommons;
+}
+
+.questionsTable{
+    border-radius: 5px !important;
+}
+
+.tableHeader{
+    text-align: center;
+}
+
+.instructorQuestion{
+    top: 10%;
+    margin: 0 auto 0 auto;
+}
+
+.tabMenu{
+    width: 90% !important;
+}
