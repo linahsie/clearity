@@ -13,16 +13,20 @@ class Register extends Component {
 
         this.state = {
             user: {
+                name: '',
                 password: '',
-                email: ''
+                email: '',
+                courses: []
             },
 
             message: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeCourses = this.onChangeCourses.bind(this);
     }
 
     onSubmit(e) {
@@ -42,9 +46,7 @@ class Register extends Component {
         xhr.addEventListener('load', () => {
             if (xhr.status === 200) {
                 console.log('The form is valid');
-                this.setState({
-                    message: 'Registered!'
-                })
+                location.href = '/dashboard';
             } else {
                 this.setState({
                     message: 'Unable to register'
@@ -52,6 +54,14 @@ class Register extends Component {
             }
         });
         xhr.send(formData);
+    }
+
+    onChangeName(e) {
+        const user = this.state.user;
+        user.name = e.target.value;
+        this.setState({
+            user
+        })
     }
 
     onChangeEmail(e) {
@@ -69,25 +79,62 @@ class Register extends Component {
             user
         })
     }
-
+    onChangeCourses(e) {
+        const user = this.state.user;
+        user.courses = e.target.value;
+        this.setState({
+            user
+        })
+    }
     render() {
         return(
-            <form className="Register" action="/" onSubmit={this.onSubmit}>
-                <Card className="Register__content">
+            <div>
+              <div className="ui vertical masthead center aligned segment landing-image">
+                <div className="ui container">
+                  <div className="ui large inverted secondary network menu">
+                    <Link to="/" className="item" id="logo">Clearity</Link>
+                    <div className="right item">
+                        <Link to="/login" className="item">
+                      <a className="ui button">Log in</a>
+                      </Link>
+                        <Link to="/register" className="item">
+                      <a className="ui primary button" id="theme-blue">Sign Up</a>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <form className="Register" action="/" onSubmit={this.onSubmit}>
+                <Card className="Register__content pad">
                     <div>
                         <h1>Register</h1>
-                        <Input label="Email" onChange={this.onChangeEmail} />
-                        <br/><br/>
-                        <Input label="Password" onChange={this.onChangePassword} />
-                        <br/><br/>
+                        <div className="ui primary button" id="theme-blue">
+                            As Student
+                        </div>
+                        <div className="ui primary button" id="theme-white">
+                            As Instructor
+                        </div>
+                        <div className="register_student">
+                            <br/>
+                            <Input label="Name" onChange={this.onChangeName} />
+                            <br/><br/>
+                            <Input label="Email" onChange={this.onChangeEmail} />
+                            <br/><br/>
+                            <Input label="Password" onChange={this.onChangePassword} />
+                            <br/><br/>
+                            <Input label="Course Code" onChange={this.onChangePassword} />
+                            <br/><br/>
+                            <button class="ui basic button">
+                              Add Course
+                            </button>
+                        </div>
                         <p>{this.state.message}</p>
-                        <Input type="submit" />
+                        <Input type="submit" id="theme-blue"/>
                         <h4>Already registered? Click <Link to="/login">here</Link> to Log-in!</h4>
-
-                        <Link to="/dashboard"><p>Go to Dashboard</p></Link>
                     </div>
                 </Card>
             </form>
+              </div>
+            </div>
     )
 }
 }
