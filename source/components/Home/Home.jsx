@@ -30,12 +30,12 @@ class Home extends Component {
                   <h2>
                     Streamline communication between students and educators.
                   </h2>
-                  <Link to="/register" className="item">
+                  <Link to="/register" className="item" params={{ student: true }}>
                     <div className="ui huge primary button" id="theme-blue">
                       Sign Up as Student
                     </div>
                   </Link>
-                  <Link to="/register" className="item">
+                  <Link to="/register" className="item" params={{ student: false }}>
                     <div className="ui huge primary button" id="theme-blue">
                       Sign Up as Instructor
                     </div>
