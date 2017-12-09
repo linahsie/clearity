@@ -63,8 +63,8 @@ class Dashboard extends Component {
                               <Card.Description textAlign="right">
                                 <Icon name='circle'/>Offline
                               </Card.Description>
-                              <Card.Header>CS 498RK</Card.Header>
-                              <Card.Meta>The Art of Web Programming</Card.Meta>
+                              <Card.Header>CS 465</Card.Header>
+                              <Card.Meta>User Interface Design</Card.Meta>
                               <Card.Description>Molly wants to add you to the group</Card.Description>
                             </Card.Content>
                             <Card.Content extra>
