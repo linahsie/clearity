@@ -26,6 +26,21 @@ class Login extends Component {
     }
 
     onSubmit(e) {
+        // axios.post('/login', {
+        //     email: this.state.user.email,
+        //     password: this.state.user.password
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //     location.href = '/dashboard';
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //     this.setState({
+        //             message: 'Incorrect name or password'
+        //         })
+        //   });
+
         e.preventDefault();
 
         const email = encodeURIComponent(this.state.user.email);

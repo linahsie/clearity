@@ -35,7 +35,58 @@ class Register extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
+        // if(this.state.showInstructor===true){
+        //     axios.post('/register', {
+        //     name: this.state.user.name,
+        //     email: this.state.user.email,
+        //     password: this.state.user.password,
+        //     is_instructor: this.state.showInstructor
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //     location.href = '/dashboard';
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //     this.setState({
+        //              message: 'Unable to register'
+        //          })
+        //   });
+        // }
+        // else{
+        //     var id = 0;
+        //     for(id = 1; id < this.user.courses.length; id++){
+        //         axios.put('/add-class', {
+        //             course: this.state.user.courses[i]
+        //           })
+        //           .then(function (response) {
+        //             console.log(response);
+        //           })
+        //           .catch(function (error) {
+        //             console.log(error);
+        //             this.setState({
+        //                      message: 'Unable to register class'
+        //                  })
+        //           });
+        //     }
+            
+        //     axios.post('/register', {
+        //     name: this.state.user.name,
+        //     email: this.state.user.email,
+        //     password: this.state.user.password,
+        //     is_instructor: this.state.showInstructor
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //     location.href = '/dashboard';
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //     this.setState({
+        //              message: 'Unable to register '
+        //          })
+        //   });
+        // }
         // create a string for an HTTP body message
         const name = encodeURIComponent(this.state.user.username);
         const email = encodeURIComponent(this.state.user.email);
@@ -148,7 +199,7 @@ class Register extends Component {
                                 {this.state.inputList.map(function(input, index) {
                                     return input;
                                 })}
-                                <div className="ui basic button" onClick={this.onAddBtnClick}>
+                                <div className="ui basic button pad" onClick={this.onAddBtnClick}>
                                   Add Course
                                 </div>
                         
