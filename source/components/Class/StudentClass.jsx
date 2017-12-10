@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Menu, Container, Button, Card, Image, Icon, TextArea, Table } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
+
 import styles from './Class.scss'
 
 class StudentClass extends Component {

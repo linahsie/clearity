@@ -1,0 +1,30 @@
+@mixin buttonDefault($inputWidth, $marginTop){
+    width: $inputWidth;
+    margin: $marginTop auto 0 auto !important;
+    border-radius: 20px !important;
+}
+
+.sessions{
+    text-align: center;
+    display: block;
+    .header{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    ul{
+        width: 40%;
+        list-style-type: none;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.sessionButton, .currentSession{
+    @include buttonDefault(100%, 5%);
+}
+
+.currentSession{
+    @include buttonDefault(40%, 1%);
+    background-color: #48E0CD !important;
+}

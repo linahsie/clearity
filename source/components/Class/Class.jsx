@@ -6,22 +6,28 @@ import { Link } from 'react-router-dom'
 
 import StudentClass from './StudentClass.jsx'
 import InstructorClass from './InstructorClass.jsx'
+import History from './History.jsx'
 
 import styles from './Class.scss'
 
 class Class extends Component {
 
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             classId: "",
             isInstructor: false,
+            isActive: false,
             activeItem: "session"
         }
     }
 
     handleTabItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+    switchToCurrentSession = () => {
+        this.setState({ activeItem: "session" })
+    }
 
     render() {
         let activeItem = this.state.activeItem;
@@ -44,19 +50,20 @@ class Class extends Component {
                         </Menu.Item>
                     </Container>
                 </Menu>
-                <Menu attached='top' tabular className="tabMenu">
-                <Menu.Item name='session' active={activeItem === 'session'} onClick={this.handleTabItemClick}/>
-                <Menu.Item name='history' active={activeItem === 'history'} onClick={this.handleTabItemClick} />
-                </Menu>
+                <div  className="tabMenu">
+                    <Menu attached='top' tabular>
+                    <Menu.Item name='session' active={activeItem === 'session'} onClick={this.handleTabItemClick}/>
+                    <Menu.Item name='history' active={activeItem === 'history'} onClick={this.handleTabItemClick} />
+                    </Menu>
 
-                <Segment attached='bottom'>
-                    {activeItem === 'session' ? (
-                        this.state.isInstructor ? <InstructorClass /> : <StudentClass />
-                        ) : (
-                        <p>History</p>
-                    )}
-                </Segment>
-
+                    <Segment attached='bottom'>
+                        {activeItem === 'session' ? (
+                            this.state.isInstructor ? <InstructorClass /> : <StudentClass />
+                            ) : (
+                            <History  isActive={this.state.isActive} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                        )}
+                    </Segment>
+                </div>
             </div>
         )
     }
