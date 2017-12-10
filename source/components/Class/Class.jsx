@@ -16,7 +16,8 @@ class Class extends Component {
     constructor(props){
         super(props);
         this.state = {
-            classId: "",
+            classId: this.props.location.state.classId,
+            classTitle: this.props.location.state.title,
             isInstructor: false,
             isActive: false,
             activeItem: "session"
@@ -60,7 +61,7 @@ class Class extends Component {
                         {activeItem === 'session' ? (
                             this.state.isInstructor ? <InstructorClass /> : <StudentClass />
                             ) : (
-                            <History  isActive={this.state.isActive} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                            <History  isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
                         )}
                     </Segment>
                 </div>

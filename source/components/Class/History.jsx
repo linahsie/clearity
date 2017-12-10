@@ -14,6 +14,7 @@ class History extends Component {
         this.state = {
             isActive: true,//this.props.isActive,
             classId: this.props.classId,
+            classTitle: this.props.classTitle,
             sessions: _dummyData
         }
 
@@ -21,12 +22,11 @@ class History extends Component {
 
     componentDidMount(){
         //either make calls to API for list of history sessions here or in Class component
-        console.log("did mount");
     }
 
     generateButton = (item, index) => {
         return(
-            <li><Button className="sessionButton" key={index}>{item}</Button></li>
+            <li key={index}><Button className="sessionButton">{item}</Button></li>
         )
     }
 
@@ -37,7 +37,7 @@ class History extends Component {
     render(){
         return(
             <div className='sessions'>
-                <h3 className='header'>Records for _CLASSNAME_</h3>
+                <h3 className='header'>Records for {this.state.classTitle}</h3>
                 { this.state.isActive &&
                   <Button className="currentSession" onClick={this.onCurrentSessionClick}>Current Session</Button>
                 }

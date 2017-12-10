@@ -45,6 +45,7 @@ class Dashboard extends Component {
 
                 <Container>
                     <Card.Group>
+                        <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
                         <Card>
                             <Card.Content>
                               <Card.Description textAlign="right">
@@ -58,6 +59,7 @@ class Dashboard extends Component {
                                 <Button basic color='green' fluid>Join</Button>
                             </Card.Content>
                         </Card>
+                        </Link>
                         <Card>
                             <Card.Content>
                               <Card.Description textAlign="right">
