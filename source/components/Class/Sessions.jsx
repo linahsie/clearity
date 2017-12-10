@@ -4,9 +4,9 @@ import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
-import styles from './History.scss'
+import styles from './Sessions.scss'
 
-class History extends Component {
+class Sessions extends Component {
 
     constructor(props){
         super(props);
@@ -56,4 +56,4 @@ History.propTypes = {
     sessions: PropTypes.array
 }
 
-export default History
+export default Sessions

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 import StudentClass from './StudentClass.jsx'
 import InstructorClass from './InstructorClass.jsx'
-import History from './History.jsx'
+import Sessions from './Sessions.jsx'
 
 import styles from './Class.scss'
 
@@ -61,7 +61,7 @@ class Class extends Component {
                         {activeItem === 'session' ? (
                             this.state.isInstructor ? <InstructorClass /> : <StudentClass />
                             ) : (
-                            <History  isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                            <Sessions  isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
                         )}
                     </Segment>
                 </div>
