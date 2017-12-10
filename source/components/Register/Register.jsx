@@ -8,8 +8,8 @@ import * as _CONFIG from '../_config/Config.js'
 
 
 class Register extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             user: {
@@ -18,15 +18,19 @@ class Register extends Component {
                 email: '',
                 courses: []
             },
-            showStudent: true,
-            showInstructor: true,
+            inputList: [],
+            showStudent: false,
+            showInstructor: false,
             message: ''
         };
+        this.ChangeToStudent = this.ChangeToStudent.bind(this);
+        this.ChangeToInstructor = this.ChangeToInstructor.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeCourses = this.onChangeCourses.bind(this);
+        this.onAddBtnClick = this.onAddBtnClick.bind(this);
     }
 
     onSubmit(e) {
@@ -92,12 +96,19 @@ class Register extends Component {
     }
     onChangeCourses(e) {
         const user = this.state.user;
-        // user.courses = e.target.value;
+        user.courses = e.target.value;
         this.setState({
             user
         })
     }
+    onAddBtnClick(event) {
+        const inputList = this.state.inputList;
+        this.setState({
+            inputList: inputList.concat(<Input label="Course Code" class="pad" onChange={this.onChangeCourses} />)
+        });
+    }
     render() {
+        console.log(this.props.student)
         return(
             <div>
               <div className="ui vertical masthead center aligned segment landing-image">
@@ -116,12 +127,12 @@ class Register extends Component {
                 </div>
                 <form className="Register" action="/" onSubmit={this.onSubmit}>
                     <Card className="Register__content">
-                        <div className="pad">
+                        <div>
                             <h1>Register</h1>
-                            <div className="ui primary button" id={this.props.student===true? "theme-blue" : "theme-white"} onClick={this.ChangeToStudent}>
+                            <div className="ui primary button" id={this.state.showStudent===true? "theme-blue" : "theme-white"} onClick={this.ChangeToStudent}>
                                 As Student
                             </div>
-                            <div className="ui primary button" id={this.props.student===false? "theme-blue" : "theme-white"} onClick={this.ChangeToInstructor}>
+                            <div className="ui primary button" id={this.state.showInstructor===true? "theme-blue" : "theme-white"} onClick={this.ChangeToInstructor}>
                                 As Instructor
                             </div>
                             <div className={this.state.showStudent ? '' : 'hidden'}>
@@ -132,13 +143,25 @@ class Register extends Component {
                                 <br/><br/>
                                 <Input label="Password" onChange={this.onChangePassword} />
                                 <br/><br/>
-                                <Input label="Course Code" onChange={this.onChangePassword} />
+                                <Input label="Course Code" onChange={this.onChangeCourses} />
                                 <br/><br/>
-                                <button className="ui basic button">
+                                {this.state.inputList.map(function(input, index) {
+                                    return input;
+                                })}
+                                <div className="ui basic button" onClick={this.onAddBtnClick}>
                                   Add Course
-                                </button>
+                                </div>
+                        
                             </div>
-                            
+                            <div className={this.state.showInstructor ? '' : 'hidden'}>
+                                <br/>
+                                <Input label="Name" onChange={this.onChangeName} />
+                                <br/><br/>
+                                <Input label="Email" onChange={this.onChangeEmail} />
+                                <br/><br/>
+                                <Input label="Password" onChange={this.onChangePassword} />
+                                <br/><br/>
+                            </div>                            
                             <p>{this.state.message}</p>
                             <Input type="submit" id="theme-blue"/>
                             <h4>Already registered? Click <Link to="/login">here</Link> to Log-in!</h4>
