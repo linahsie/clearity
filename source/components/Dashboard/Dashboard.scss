@@ -22,3 +22,12 @@
 .addClass{
 	width: 50px;
 }
+
+#cards-container {
+    display: flex;
+    justify-content: center;
+}
+
+.card-element {
+    margin: .875em .5em !important;
+}

@@ -128,19 +128,19 @@ class Dashboard extends Component {
                 <Container id="cards-container">
                     <Card.Group>
                         <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
-                        <Card>
-                            <Card.Content>
-                              <Card.Description textAlign="right">
-                                  <Icon name='circle' color='green'/>Live
-                              </Card.Description>
-                              <Card.Header>CS 498RK</Card.Header>
-                              <Card.Meta>The Art of Web Programming</Card.Meta>
-                              <Card.Description>Fall 2017</Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <Button id="theme-green" fluid>Join</Button>
-                            </Card.Content>
-                        </Card>
+                            <Card className="card-element">
+                                <Card.Content>
+                                  <Card.Description textAlign="right">
+                                      <Icon name='circle' color='green'/>Live
+                                  </Card.Description>
+                                  <Card.Header>CS 498RK</Card.Header>
+                                  <Card.Meta>The Art of Web Programming</Card.Meta>
+                                  <Card.Description>Fall 2017</Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <Button id="theme-green" fluid>Join</Button>
+                                </Card.Content>
+                            </Card>
                         </Link>
                         <Card>
                             <Card.Content>
@@ -151,6 +151,7 @@ class Dashboard extends Component {
                               <Card.Meta>User Interface Design</Card.Meta>
                               <Card.Description>Fall 2017</Card.Description>
                             </Card.Content>
+                            
                             <Card.Content extra>
                                 <div className='ui two buttons'>
                                     <Button basic color='grey' disabled>Join</Button>
@@ -158,48 +159,44 @@ class Dashboard extends Component {
                             </Card.Content>
                         </Card>
                         <Modal size='mini' trigger={
-                        <Card raised>
+                            <Card raised>
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Create a class</Header>
                                 </Card.Content>
-                        </Card>
-                    }>
-                    <Modal.Header>
-            Create a Class
-          </Modal.Header>
-          <Modal.Content>
-<Input label="Course Name" onChange={this.createCourse} />
-          </Modal.Content>
-          <Modal.Actions>
-            <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
-            <Button>
-              Cancel
-            </Button>
-          </Modal.Actions>
-          {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
-  </Modal>
+                            </Card>
+                            } 
+                        >
+                            <Modal.Header>Create a Class</Modal.Header>
+                            <Modal.Content>
+                                <Input label="Course Name" onChange={this.createCourse} />
+                            </Modal.Content>
+                            <Modal.Actions>
+                                <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
+                                <Button>Cancel</Button>
+                            </Modal.Actions>
+                            {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
+                        </Modal>
+                        
                         <Modal size='mini' trigger={
-                        <Card raised>
+                            <Card raised>
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Add a class</Header>
                                 </Card.Content>
-                        </Card>
-                    }>
-                    <Modal.Header>
-            Add a Class
-          </Modal.Header>
-          <Modal.Content>
-<Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
-          </Modal.Content>
-          <Modal.Actions>
-            <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
-            <Button>
-              Cancel
-            </Button>
-          </Modal.Actions>
-  </Modal>
+                            </Card>
+                        }>
+                            <Modal.Header>
+                                Add a Class
+                            </Modal.Header>
+                            <Modal.Content>
+                                <Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
+                            </Modal.Content>
+                            <Modal.Actions>
+                                <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
+                                <Button>Cancel</Button>
+                            </Modal.Actions>
+                        </Modal>
                   </Card.Group>
                 </Container>
             </div>
