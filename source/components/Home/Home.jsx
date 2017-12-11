@@ -7,7 +7,7 @@ import styles from './Home.scss'
 class Home extends Component {
     render() {
         return(
-            <div className="flex">
+            <div className="wrapper-home">
               <div className="ui vertical masthead center aligned segment landing-image">
                 <div className="ui container">
                   <div className="ui large inverted secondary network menu">
@@ -23,7 +23,7 @@ class Home extends Component {
                   </div>
                 </div>
                 <div className="Home">
-                <div className="ui text container">
+                <div className="ui text container" id = "Home_content">
                   <h1 className="ui header" id="title-clearity">
                     Clearity
                   </h1>

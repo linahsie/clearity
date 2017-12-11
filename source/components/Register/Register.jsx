@@ -140,8 +140,8 @@ class Register extends Component {
     render() {
         console.log(this.props.student)
         return(
-            <div>
-              <div className="ui vertical masthead center aligned segment landing-image">
+            <div className="wrapper-register">
+              <div className="ui vertical masthead center aligned segment landing-image-register">
                 <div className="ui container">
                   <div className="ui large inverted secondary network menu">
                     <Link to="/" className="item" id="logo">Clearity</Link>
