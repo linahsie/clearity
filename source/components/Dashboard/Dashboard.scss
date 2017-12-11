@@ -25,9 +25,15 @@
 
 #cards-container {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
+	margin: 0 auto 0 auto !important;
+}
+
+Card {
+    margin: 10px !important;
 }
 
 .card-element {
     margin: .875em .5em !important;
 }
+
