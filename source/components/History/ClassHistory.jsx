@@ -22,7 +22,6 @@ class ClassHistory extends Component {
     }
 
     render() {
-        console.log(this.state);
         return(
             <div>
                 <Menu fluid widths={3} borderless stackable>
@@ -43,7 +42,7 @@ class ClassHistory extends Component {
                     </Container>
                 </Menu>
                 <div>
-                    <h3>Questions from {this.state.classTitle} on {this.state.classDate}</h3>
+                    <h3 className='historyMainHeader'>Questions from {this.state.classTitle} on {this.state.classDate}</h3>
                 </div>
             </div>
         )
