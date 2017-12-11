@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input, Card } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import axios from 'axios'
 
@@ -17,7 +17,7 @@ class Login extends Component {
                 password: '',
                 email: ''
             },
-
+            redirect: false,
             message: ''
         }
 
@@ -28,13 +28,17 @@ class Login extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        let component = this;
         axios.post(_CONFIG.devURL + '/login', {
             email: this.state.user.email,
             password: this.state.user.password
           })
           .then(function (response) {
             console.log(response);
-            location.href = '/dashboard';
+//            location.href = '/dashboard';
+            component.setState({
+                redirect: true
+            })
           })
           .catch(function (error) {
             console.log(error);
@@ -42,6 +46,8 @@ class Login extends Component {
                     message: 'Incorrect name or password'
                 })
           });
+        
+        
 
         // const email = encodeURIComponent(this.state.user.email);
         // const password = encodeURIComponent(this.state.user.password);
@@ -84,7 +90,8 @@ class Login extends Component {
     render() {
         return(
             <div className="wrapper-login">
-              <div className="ui vertical masthead center aligned segment landing-image-login">
+              {this.state.redirect ? <Redirect to={{pathname: '/dashboard', state:{user: this.state.user}}}/> :
+                <div className="ui vertical masthead center aligned segment landing-image-login">
                 <div className="ui container">
                   <div className="ui large inverted secondary network menu">
                     <Link to="/" className="item" id="logo">Clearity</Link>
@@ -113,11 +120,10 @@ class Login extends Component {
                         </div>
                     </Card>
                 </form>
-              </div>
+              </div>}
             </div>
-
-    )
-}
+        )
+    }
 }
 
 export default Login
