@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import styles from './Sessions.scss'
 
@@ -15,7 +15,9 @@ class Sessions extends Component {
             isActive: true,//this.props.isActive,
             classId: this.props.classId,
             classTitle: this.props.classTitle,
-            sessions: _dummyData
+            sessions: _dummyData,
+            redirect: false,
+            selectedDate: ""
         }
 
     }
@@ -26,7 +28,7 @@ class Sessions extends Component {
 
     generateButton = (item, index) => {
         return(
-            <li key={index}><Button className="sessionButton" value={item} onClick={this.onSessionClick}>{item}</Button></li>
+            <li key={index}><Button className="sessionButton" value={item} classtitle={this.state.classTitle} onClick={this.onSessionClick}>{item}</Button></li>
         )
     }
 
@@ -35,12 +37,15 @@ class Sessions extends Component {
     }
 
     onSessionClick = (event, data) => {
-        this.props.onSessionClick(event, data);
+        this.setState({
+            redirect: true,
+            selectedDate: data.value
+        })
     }
 
-    render(){
+    renderSessions = () => {
         return(
-            <div className='sessions'>
+            <div>
                 <h3 className='header'>Records for {this.state.classTitle}</h3>
                 { this.state.isActive &&
                   <Button className="currentSession" onClick={this.onCurrentSessionClick}>Current Session</Button>
@@ -49,6 +54,16 @@ class Sessions extends Component {
                 <ul>
                 {this.state.sessions.map(this.generateButton)}
                 </ul>
+            </div>
+        )
+    }
+
+    render(){
+        return(
+            <div className='sessions'>
+                { this.state.redirect ? <Redirect to="/history" data={{classId: this.state.classId, date: this.state. selectedDate, title: this.state.classTitle}}/> :
+                    this.renderSessions()
+                }
             </div>
         )
     }
