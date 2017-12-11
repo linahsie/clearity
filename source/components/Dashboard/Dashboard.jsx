@@ -139,6 +139,7 @@ class Dashboard extends Component {
               Cancel
             </Button>
           </Modal.Actions>
+          {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
   </Modal>
                         <Modal size='mini' trigger={
                         <Card raised>
@@ -160,7 +161,6 @@ class Dashboard extends Component {
               Cancel
             </Button>
           </Modal.Actions>
-          <{this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>/>
   </Modal>
                   </Card.Group>
                 </Container>
@@ -174,5 +174,44 @@ Dashboard.propTypes = {
     classes: PropTypes.array,
 }
 */
-
+//CODE FOR TEACHER QUESTION
+{/*<Modal size='small' trigger={}>
+    <Modal.Header>
+            Instructor Question
+          </Modal.Header>
+          <Modal.Content>
+          What is the purpose?
+<Form>
+        <Form.Field>
+        </Form.Field>
+        <Form.Field>
+          <Checkbox
+            radio
+            label='Answer A'
+            name='checkboxRadioGroup'
+            value='A'
+            checked={this.state.value === 'A'}
+            onChange={this.handleChange}
+          />
+        </Form.Field>
+        <Form.Field>
+          <Checkbox
+            radio
+            label='Answer B'
+            name='checkboxRadioGroup'
+            value='B'
+            checked={this.state.value === 'B'}
+            onChange={this.handleChange}
+          />
+        </Form.Field>
+      </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button id="theme-blue" onClick={this.answerQuestion}>Answer Question</Button>
+            <Button>
+              Cancel
+            </Button>
+          </Modal.Actions>
+  </Modal>
+*/}
 export default Dashboard
