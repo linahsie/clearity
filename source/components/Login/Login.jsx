@@ -29,10 +29,10 @@ class Login extends Component {
     onSubmit(e) {
         e.preventDefault();
         let component = this;
-        axios.post(_CONFIG.devURL + '/login', {
-            email: this.state.user.email,
-            password: this.state.user.password
-          })
+        const email = encodeURIComponent(this.state.user.email);
+        const password = encodeURIComponent(this.state.user.password);
+        const formData = `email=${email}&password=${password}`;
+        axios.post(_CONFIG.devURL + '/login', formData)
           .then(function (response) {
             console.log(response);
 //            location.href = '/dashboard';

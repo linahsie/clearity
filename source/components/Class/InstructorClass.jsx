@@ -20,8 +20,8 @@ class InstructorClass extends Component {
             classId: "",
             questionFromInst: "",
             answerOptions: [],
-            additionalOptions: 0,
-            currOptions: 2,
+            questionCount: 2,
+            additionalOptions: [],
             sortColumn: "Upvotes",
             direction: "descending",
             questions: _.sortBy(_dummyData, ["Upvotes"])
@@ -72,9 +72,13 @@ class InstructorClass extends Component {
     }
 
     addOption = () => {
-        let currAO = this.state.additionalOptions;
+        let qc = this.state.questionCount + 1;
         console.log('adding!');
-        this.setState({additionalOptions: currAO + 1});
+        const qns = this.state.additionalOptions;
+        this.setState({
+            additionalOptions: qns.concat(<Input key={qc} className='instOption' placeholder='Option'/>),
+            questionCount: qc
+        });
     }
 
     generateAdditionalOptions = () => {
@@ -94,9 +98,11 @@ class InstructorClass extends Component {
                         <Modal.Content>
                               <TextArea className="instQuestion" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({questionFromInst: data.value})}/>
                               <div className='instQnArea'>
-                                  <Input index={0} className='instOption' placeholder='Option'/>
-                                  <Input index={1} className='instOption' placeholder='Option'/>
-                                  {this.generateAdditionalOptions()}
+                                  <Input key={0} className='instOption' placeholder='Option'/>
+                                  <Input key={1} className='instOption' placeholder='Option'/>
+                                  {this.state.additionalOptions.map(function(input, index) {
+                                      return input;
+                                  })}
                               </div>
                               <Button className='addOption' color='blue' onClick={this.addOption} inverted>Add Option</Button>
                         </Modal.Content>
