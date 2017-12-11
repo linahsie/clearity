@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Container, Button, Icon, Table, Modal, TextArea } from 'semantic-ui-react'
+import { Header, Container, Button, Icon, Table, Modal, TextArea, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import styles from './Class.scss'
@@ -19,6 +19,7 @@ class InstructorClass extends Component {
             modalOpen: false,
             classId: "",
             questionFromInst: "",
+            answerOptions: [],
             sortColumn: "Upvotes",
             direction: "descending",
             questions: _.sortBy(_dummyData, ["Upvotes"])
@@ -77,8 +78,10 @@ class InstructorClass extends Component {
                     <Modal trigger={<Button  onClick={this.handleOpen} className="instructorQuestion">Ask Question</Button>}
                     open={this.state.modalOpen} onClose={this.handleClose}>
                         <Modal.Header>Post a Question</Modal.Header>
-                        <Modal.Content>
+                        <Modal.Content className='instQnArea'>
                               <TextArea className="instQuestion" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({questionFromInst: data.value})}/>
+                              <Input className='instOption' placeholder='Option'/>
+                              <Input className='instOption' placeholder='Option'/>
                         </Modal.Content>
                         <Modal.Actions>
                           <Button color='green' onClick={this.handleClose} inverted>
