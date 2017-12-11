@@ -32,7 +32,7 @@ class StudentClass extends Component {
         if (this.state.sortColumn !== clickedColumn) {
             this.setState({
                 sortColumn: clickedColumn,
-                questions: _.sortBy(questionData, [clickedColumn]).reverse(),
+                questions: _.sortBy(questionData, [clickedColumn]),
                 direction: 'descending'
             })
         }else{
