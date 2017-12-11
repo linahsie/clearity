@@ -128,7 +128,6 @@ class Dashboard extends Component {
                 <Container>
                     <Card.Group id="cards-container">
                         <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
-<<<<<<< HEAD
                             <Card className="card-element">
                                 <Card.Content>
                                   <Card.Description textAlign="right">
@@ -142,21 +141,6 @@ class Dashboard extends Component {
                                     <Button id="theme-green" fluid>Join</Button>
                                 </Card.Content>
                             </Card>
-=======
-                        <Card className="card-element">
-                            <Card.Content>
-                              <Card.Description textAlign="right">
-                                  <Icon name='circle' color='green'/>Live
-                              </Card.Description>
-                              <Card.Header>CS 498RK</Card.Header>
-                              <Card.Meta>The Art of Web Programming</Card.Meta>
-                              <Card.Description>Fall 2017</Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <Button id="theme-green" fluid>Join</Button>
-                            </Card.Content>
-                        </Card>
->>>>>>> 5c5b27cdc338c0e22405ce075f8d686734e20b6c
                         </Link>
                         <Card className="card-element">
                             <Card.Content>
@@ -175,11 +159,7 @@ class Dashboard extends Component {
                             </Card.Content>
                         </Card>
                         <Modal size='mini' trigger={
-<<<<<<< HEAD
                             <Card raised>
-=======
-                        <Card>
->>>>>>> 5c5b27cdc338c0e22405ce075f8d686734e20b6c
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Create a class</Header>
