@@ -1,0 +1,35 @@
+/* line 1, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+#theme-blue {
+  background-color: #48E0CD; }
+
+/* line 5, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+#logo {
+  color: #48E0CD !important;
+  font-size: 30px; }
+
+/* line 10, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+.ui.cards {
+  margin-top: 20px; }
+
+/* line 14, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+.add-create {
+  padding-top: 50px !important;
+  padding-bottom: 50px !important; }
+  /* line 18, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+  .add-create header {
+    margin-top: 20px; }
+
+/* line 23, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+#cards-container {
+  display: flex;
+  justify-content: center; }
+
+/* line 28, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+Card {
+  margin: 10px !important; }
+
+/* line 32, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+.card-element {
+  margin: .875em .5em !important; }
+
+/*# sourceMappingURL=Dashboard.css.map */
