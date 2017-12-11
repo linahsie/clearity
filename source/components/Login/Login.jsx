@@ -26,43 +26,42 @@ class Login extends Component {
     }
 
     onSubmit(e) {
-        // axios.post('/login', {
-        //     email: this.state.user.email,
-        //     password: this.state.user.password
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //     location.href = '/dashboard';
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //     this.setState({
-        //             message: 'Incorrect name or password'
-        //         })
-        //   });
-
         e.preventDefault();
-
-        const email = encodeURIComponent(this.state.user.email);
-        const password = encodeURIComponent(this.state.user.password);
-        const formData = `email=${email}&password=${password}`;
-
-        // create an AJAX request (This should probably done with Axios instead)
-        const xhr = new XMLHttpRequest();
-        xhr.open('post', _CONFIG.devURL);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.responseType = 'json';
-        xhr.addEventListener('load', () => {
-            if (xhr.status === 200) {
-                location.href = '/dashboard';
-
-            } else {
-                this.setState({
+        axios.post('/login', {
+            email: this.state.user.email,
+            password: this.state.user.password
+          })
+          .then(function (response) {
+            console.log(response);
+            location.href = '/dashboard';
+          })
+          .catch(function (error) {
+            console.log(error);
+            this.setState({
                     message: 'Incorrect name or password'
                 })
-            }
-        });
-        xhr.send(formData);
+          });
+
+        // const email = encodeURIComponent(this.state.user.email);
+        // const password = encodeURIComponent(this.state.user.password);
+        // const formData = `email=${email}&password=${password}`;
+
+        // // create an AJAX request (This should probably done with Axios instead)
+        // const xhr = new XMLHttpRequest();
+        // xhr.open('post', _CONFIG.devURL);
+        // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // xhr.responseType = 'json';
+        // xhr.addEventListener('load', () => {
+        //     if (xhr.status === 200) {
+        //         location.href = '/dashboard';
+
+        //     } else {
+        //         this.setState({
+        //             message: 'Incorrect name or password'
+        //         })
+        //     }
+        // });
+        // xhr.send(formData);
     }
 
     onChangeEmail(e) {
