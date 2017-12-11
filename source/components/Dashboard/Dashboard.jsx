@@ -160,6 +160,7 @@ class Dashboard extends Component {
               Cancel
             </Button>
           </Modal.Actions>
+          <{this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>/>
   </Modal>
                   </Card.Group>
                 </Container>
