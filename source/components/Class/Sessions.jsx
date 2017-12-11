@@ -4,9 +4,9 @@ import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
-import styles from './History.scss'
+import styles from './Sessions.scss'
 
-class History extends Component {
+class Sessions extends Component {
 
     constructor(props){
         super(props);
@@ -26,12 +26,16 @@ class History extends Component {
 
     generateButton = (item, index) => {
         return(
-            <li key={index}><Button className="sessionButton">{item}</Button></li>
+            <li key={index}><Button className="sessionButton" value={item} onClick={this.onSessionClick}>{item}</Button></li>
         )
     }
 
     onCurrentSessionClick = () => {
         this.props.onCurrentClick();
+    }
+
+    onSessionClick = (event, data) => {
+        this.props.onSessionClick(event, data);
     }
 
     render(){
@@ -56,4 +60,4 @@ History.propTypes = {
     sessions: PropTypes.array
 }
 
-export default History
+export default Sessions
