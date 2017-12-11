@@ -128,9 +128,11 @@ class Dashboard extends Component {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
+                    <Link to="/dashboard" className="item">
                     <Button>
                         Cancel
                     </Button>
+                    </Link>
                 </Modal.Actions>
                 {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
           </Modal>
@@ -151,9 +153,11 @@ class Dashboard extends Component {
               </Modal.Content>
                   <Modal.Actions>
               <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
+              <Link to="/dashboard" className="item">
               <Button>
                 Cancel
               </Button>
+              </Link>
               </Modal.Actions>
           </Modal>
         }
