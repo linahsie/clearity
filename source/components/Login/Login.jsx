@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Input, Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import axios from 'axios'
 
 import styles from './Login.scss'
 import * as _CONFIG from '../_config/Config.js'
@@ -82,8 +83,8 @@ class Login extends Component {
 
     render() {
         return(
-            <div>
-              <div className="ui vertical masthead center aligned segment landing-image">
+            <div className="wrapper-login">
+              <div className="ui vertical masthead center aligned segment landing-image-login">
                 <div className="ui container">
                   <div className="ui large inverted secondary network menu">
                     <Link to="/" className="item" id="logo">Clearity</Link>
