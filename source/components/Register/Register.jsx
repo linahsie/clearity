@@ -69,7 +69,7 @@ class Register extends Component {
         //                  })
         //           });
         //     }
-            
+
         //     axios.post('/register', {
         //     name: this.state.user.name,
         //     email: this.state.user.email,
@@ -202,7 +202,7 @@ class Register extends Component {
                                 <div className="ui basic button pad" onClick={this.onAddBtnClick}>
                                   Add Course
                                 </div>
-                        
+
                             </div>
                             <div className={this.state.showInstructor ? '' : 'hidden'}>
                                 <br/>
@@ -212,7 +212,7 @@ class Register extends Component {
                                 <br/><br/>
                                 <Input label="Password" onChange={this.onChangePassword} />
                                 <br/><br/>
-                            </div>                            
+                            </div>
                             <p>{this.state.message}</p>
                             <Input type="submit" id="theme-blue"/>
                             <h4>Already registered? Click <Link to="/login">here</Link> to Log-in!</h4>
