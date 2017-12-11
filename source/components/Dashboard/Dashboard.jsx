@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { Header, Menu, Container, Button, Card, Image, Icon, Modal, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import _ from 'lodash'
 import * as _CONFIG from '../_config/Config.js'
 
-import styles from './Dashboard.css'
+import styles from './Dashboard.scss'
 
 class Dashboard extends Component {
 
@@ -14,7 +15,7 @@ class Dashboard extends Component {
         this.state = {
             classes : this.props.location.state.user.classes,
             classIds : this.props.location.state.user.course_ids,
-            isActive : new Array(this.props.location.state.user.classes.length),
+            isActive : [],
             add_class: '',
             create_class: '',
             user: this.props.location.state,
@@ -28,32 +29,12 @@ class Dashboard extends Component {
     }
 
     componentDidMount(){
-        //  const email = encodeURIComponent(this.props.location.state.user.email);
-        //  const password = encodeURIComponent(this.props.location.state.user.password);
-        //  const formData = `email=${email}&password=${password}`;
-        //
-        // axios.post( 'http://localhost:3000/api/login', formData)
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
-        // /*
-        // * GET calls here to populate classes
-        // */
-        // axios.get(`http://localhost:3000/api/home`)
-        //     .then(res => {
-        //     classes = res.map(obj => obj.data);
-        //     this.setState({ classes });
-        //     console.log(res);
-        // });
-        // if(this.props.location.state.user.is_instructor === false){
-        //     this.props.location.state.user.course_ids.map(function(item, index){
-        //
-        //     })
-        // }
+        let component = this;
+        axios.get(_CONFIG.devURL + '/active').then(function(response){
+            component.setState({isActive: response.data.activeClasses})
+        });
     }
+
     handleOpen = () => this.setState({ modalOpen: true })
 
     handleClose = () => this.setState({ modalOpen: false })
@@ -70,11 +51,13 @@ class Dashboard extends Component {
             console.log(error);
           });
     }
+
     addCourse(e){
         this.setState({
             add_class: e.target.value
         });
     }
+
     createClass(e){
         e.preventDefault();
         axios.post(_CONFIG.devURL + '/create-class', {
@@ -89,22 +72,39 @@ class Dashboard extends Component {
             console.log(error);
           });
     }
+
     createCourse(e){
         this.setState({
             create_class: e.target.value
         });
     }
 
+    /*
+
+    <Card.Meta>{item}</Card.Meta>
+    <Card.Description>{_COURSE TERM_}</Card.Description>
+    */
+
     generateClassCard = (item, index) => {
+        let active = _.indexOf(this.state.isActive, this.state.classIds[index]) !== -1;
+        let activeIcon = null
+        let activeText = ""
+        if(active){
+            activeIcon = <Icon name='circle' color='green'/>
+            activeText = "Live"
+        }else{
+            activeIcon = <Icon name='circle'/>
+            activeText = "Offline"
+        }
         return( <Link key={index} to={{pathname:"/class", state:{title: item, classId: this.state.classIds[index]}}}>
         <Card className="card-element">
             <Card.Content>
               <Card.Description textAlign="right">
-                  <Icon name='circle' color='green'/>Live
+                  {activeIcon}{activeText}
               </Card.Description>
-              <Card.Header>_COURSE CODE_</Card.Header>
-              <Card.Meta>{item}</Card.Meta>
-              <Card.Description>_COURSE TERM_</Card.Description>
+              <Card.Header>{item}</Card.Header>
+              <br></br>
+              <br></br>
             </Card.Content>
             <Card.Content extra>
                 <Button id="theme-green" fluid>Join</Button>
@@ -117,13 +117,14 @@ class Dashboard extends Component {
         console.log(this.props.location.state);
         let additionalCard = null;
         if (this.state.isInstructor) {
+
           additionalCard = <Modal size='mini'
               open={this.state.modalOpen}
               onClose={this.handleClose} 
               trigger={
               <Card onClick={this.handleOpen}>
                 <Card.Content textAlign="center" className="add-create">
-                    <Icon name='plus' color="grey"/>
+                    <Icon className="our-icon" name='plus' color="grey"/>
                     <Header as='h3' color="grey">Create a class</Header>
                 </Card.Content>
               </Card>
@@ -151,7 +152,7 @@ class Dashboard extends Component {
               trigger={
               <Card onClick={this.handleOpen}>
                       <Card.Content textAlign="center" className="add-create">
-                          <Icon name='plus' color="grey"/>
+                          <Icon name='plus' className="our-icon" color="grey"/>
                           <Header as='h3' color="grey">Add a class</Header>
                       </Card.Content>
               </Card>
@@ -194,36 +195,7 @@ class Dashboard extends Component {
 
                 <Container>
                     <Card.Group id="cards-container">
-                        <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
-                        <Card className="card-element">
-                            <Card.Content>
-                              <Card.Description textAlign="right">
-                                  <Icon name='circle' color='green'/>Live
-                              </Card.Description>
-                              <Card.Header>CS 498RK</Card.Header>
-                              <Card.Meta>The Art of Web Programming</Card.Meta>
-                              <Card.Description>Fall 2017</Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <Button id="theme-green" fluid>Join</Button>
-                            </Card.Content>
-                        </Card>
-                        </Link>
-                        <Card className="card-element">
-                            <Card.Content>
-                              <Card.Description textAlign="right">
-                                <Icon name='circle'/>Offline
-                              </Card.Description>
-                              <Card.Header>CS 465</Card.Header>
-                              <Card.Meta>User Interface Design</Card.Meta>
-                              <Card.Description>Fall 2017</Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <div className='ui two buttons'>
-                                    <Button basic color='grey' disabled>Join</Button>
-                                </div>
-                            </Card.Content>
-                        </Card>
+                        {this.state.classes.map(this.generateClassCard)}
                         {additionalCard}
                   </Card.Group>
                 </Container>

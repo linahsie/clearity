@@ -112,7 +112,7 @@ class Login extends Component {
                             <h1>Login</h1>
                             <Input label="Email" onChange={this.onChangeEmail} />
                             <br/><br/>
-                            <Input label="Password" onChange={this.onChangePassword} />
+                            <Input type="password" label="Password" onChange={this.onChangePassword} />
                             <br/><br/>
 
                             <p>{this.state.message}</p>
