@@ -16,8 +16,8 @@ class Class extends Component {
     constructor(props){
         super(props);
         this.state = {
-            classId: this.props.location.state.classId,
-            classTitle: this.props.location.state.title,
+            classId: "aaa", //this.props.location.state.classId,
+            classTitle: "bbb", //this.props.location.state.title,
             isInstructor: true,
             isActive: false,
             activeItem: "session"

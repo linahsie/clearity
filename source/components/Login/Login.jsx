@@ -42,12 +42,12 @@ class Login extends Component {
           })
           .catch(function (error) {
             console.log(error);
-            this.setState({
+            component.setState({
                     message: 'Incorrect name or password'
                 })
           });
-        
-        
+
+
 
         // const email = encodeURIComponent(this.state.user.email);
         // const password = encodeURIComponent(this.state.user.password);

@@ -20,6 +20,8 @@ class InstructorClass extends Component {
             classId: "",
             questionFromInst: "",
             answerOptions: [],
+            additionalOptions: 0,
+            currOptions: 2,
             sortColumn: "Upvotes",
             direction: "descending",
             questions: _.sortBy(_dummyData, ["Upvotes"])
@@ -69,7 +71,18 @@ class InstructorClass extends Component {
         //POST Data to students
     }
 
+    addOption = () => {
+        let currAO = this.state.additionalOptions;
+        console.log('adding!');
+        this.setState({additionalOptions: currAO + 1});
+    }
+
+    generateAdditionalOptions = () => {
+        return  <Input index={3} className='instOption' placeholder='Option'/>
+    }
+
     render() {
+        console.log(this.state.additionalOptions);
         let sortBy = this.state.sortColumn;
         let currentDirection = this.state.direction;
         return(
@@ -78,10 +91,14 @@ class InstructorClass extends Component {
                     <Modal trigger={<Button  onClick={this.handleOpen} className="instructorQuestion">Ask Question</Button>}
                     open={this.state.modalOpen} onClose={this.handleClose}>
                         <Modal.Header>Post a Question</Modal.Header>
-                        <Modal.Content className='instQnArea'>
+                        <Modal.Content>
                               <TextArea className="instQuestion" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({questionFromInst: data.value})}/>
-                              <Input className='instOption' placeholder='Option'/>
-                              <Input className='instOption' placeholder='Option'/>
+                              <div className='instQnArea'>
+                                  <Input index={0} className='instOption' placeholder='Option'/>
+                                  <Input index={1} className='instOption' placeholder='Option'/>
+                                  {this.generateAdditionalOptions()}
+                              </div>
+                              <Button className='addOption' color='blue' onClick={this.addOption} inverted>Add Option</Button>
                         </Modal.Content>
                         <Modal.Actions>
                           <Button color='green' onClick={this.handleClose} inverted>
