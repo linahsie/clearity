@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Menu, Container, Button, Card, Image, Icon } from 'semantic-ui-react'
+import { Header, Menu, Container, Button, Card, Image, Icon, Modal, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import * as _CONFIG from '../_config/Config.js'
 
 import styles from './Dashboard.css'
 
@@ -10,8 +12,15 @@ class Dashboard extends Component {
     constructor(){
         super();
         this.state = {
-            classes : []
+            classes : [],
+            add_class: '',
+            create_class: ''
         }
+        this.addClass = this.addClass.bind(this);
+        this.addCourse = this.addCourse.bind(this);
+        this.createClass = this.createClass.bind(this);
+        this.createCourse = this.createCourse.bind(this);
+
     }
 
     componentDidMount(){
@@ -19,7 +28,42 @@ class Dashboard extends Component {
         * GET calls here to populate classes
         */
     }
+    addClass(e){
+        e.preventDefault();
+        axios.put(_CONFIG.devURL + '/add-class', {
+            course: this.state.add_class
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+    addCourse(e){
+        this.setState({
+            add_class: e.target.value
+        });
+    }
+    createClass(e){
+        e.preventDefault();
+        axios.post(_CONFIG.devURL + '/create-class', {
+            course: this.state.create_class
+          })
+          .then(function (response) {
+            console.log(response);
+            //returns course code
 
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+    createCourse(e){
+        this.setState({
+            create_class: e.target.value
+        });
+    }
     render() {
         const { activeItem } = this.state
 
@@ -53,10 +97,10 @@ class Dashboard extends Component {
                               </Card.Description>
                               <Card.Header>CS 498RK</Card.Header>
                               <Card.Meta>The Art of Web Programming</Card.Meta>
-                              <Card.Description>Molly wants to add you to the group</Card.Description>
+                              <Card.Description>Fall 2017</Card.Description>
                             </Card.Content>
                             <Card.Content extra>
-                                <Button basic color='green' fluid>Join</Button>
+                                <Button id="theme-green" fluid>Join</Button>
                             </Card.Content>
                         </Card>
                         </Link>
@@ -67,7 +111,7 @@ class Dashboard extends Component {
                               </Card.Description>
                               <Card.Header>CS 465</Card.Header>
                               <Card.Meta>User Interface Design</Card.Meta>
-                              <Card.Description>Molly wants to add you to the group</Card.Description>
+                              <Card.Description>Fall 2017</Card.Description>
                             </Card.Content>
                             <Card.Content extra>
                                 <div className='ui two buttons'>
@@ -75,22 +119,48 @@ class Dashboard extends Component {
                                 </div>
                             </Card.Content>
                         </Card>
+                        <Modal size='mini' trigger={
                         <Card raised>
-                            <Link to="/createClass">
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Create a class</Header>
                                 </Card.Content>
-                            </Link>
                         </Card>
+                    }>
+                    <Modal.Header>
+            Create a Class
+          </Modal.Header>
+          <Modal.Content>
+<Input label="Course Name" onChange={this.createCourse} />
+          </Modal.Content>
+          <Modal.Actions>
+            <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
+            <Button>
+              Cancel
+            </Button>
+          </Modal.Actions>
+  </Modal>
+                        <Modal size='mini' trigger={
                         <Card raised>
-                            <Link to="/addClass">
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Add a class</Header>
                                 </Card.Content>
-                            </Link>
                         </Card>
+                    }>
+                    <Modal.Header>
+            Add a Class
+          </Modal.Header>
+          <Modal.Content>
+<Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
+          </Modal.Content>
+          <Modal.Actions>
+            <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
+            <Button>
+              Cancel
+            </Button>
+          </Modal.Actions>
+  </Modal>
                   </Card.Group>
                 </Container>
             </div>
