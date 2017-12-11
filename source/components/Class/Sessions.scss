@@ -20,11 +20,9 @@
     }
 }
 
-.sessionButton, .currentSession{
-    @include buttonDefault(100%, 5%);
-}
-
 .currentSession{
-    @include buttonDefault(40%, 1%);
+    width: 40%;
+    margin: 2% auto 2% auto !important;
+    border-radius: 20px !important;
     background-color: #48E0CD !important;
 }

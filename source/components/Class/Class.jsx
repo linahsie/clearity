@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Menu, Container, Segment} from 'semantic-ui-react'
+import { Header, Menu, Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 
@@ -15,11 +15,10 @@ class Class extends Component {
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
     constructor(props){
         super(props);
-        console.log(props);
         this.state = {
-            classId: this.props.location.state.classId,
-            classTitle: this.props.location.state.title,
-            isInstructor: false,
+            classId: "aaa", //this.props.location.state.classId,
+            classTitle: "bbb", //this.props.location.state.title,
+            isInstructor: true,
             isActive: false,
             activeItem: "session"
         }
@@ -29,11 +28,6 @@ class Class extends Component {
 
     switchToCurrentSession = () => {
         this.setState({ activeItem: "session" })
-    }
-
-    onSessionClick = (event, data) => {
-        console.log("CLass");
-        console.log(data);
     }
 
     render() {
@@ -67,7 +61,7 @@ class Class extends Component {
                         {activeItem === 'session' ? (
                             this.state.isInstructor ? <InstructorClass /> : <StudentClass />
                             ) : (
-                            <Sessions isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession} onSessionClick={this.onSessionClick}/>
+                            <Sessions isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
                         )}
                     </Segment>
                 </div>

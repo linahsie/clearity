@@ -17,7 +17,7 @@ class StudentClass extends Component {
         ];
         this.state = {
             classId: "",
-            isActive: true,
+            isActive: false,
             studentQuestion: "",
             sortColumn: "Upvotes",
             direction: "descending",
@@ -59,7 +59,7 @@ class StudentClass extends Component {
         )
     }
 
-    render() {
+    renderActive() {
         let sortBy = this.state.sortColumn;
         let currentDirection = this.state.direction;
         return(
@@ -87,6 +87,14 @@ class StudentClass extends Component {
                        </Table.Body>
                     </Table>
                 </Container>
+            </div>
+        )
+    }
+
+    render(){
+        return(
+            <div className={this.state.isActive ? '' : 'inactiveHeader'}>
+                {this.state.isActive ? this.renderActive() : <h3>Class is currently not active</h3>}
             </div>
         )
     }
