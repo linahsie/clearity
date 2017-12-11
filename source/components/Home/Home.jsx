@@ -14,10 +14,10 @@ class Home extends Component {
                     <Link to="/" className="item" id="logo">Clearity</Link>
                     <div className="right item">
                         <Link to="/login" className="item">
-                      <a className="ui button">Log in</a>
+                      <Button className="ui button">Log in</Button>
                       </Link>
                         <Link to="/register" className="item">
-                      <a className="ui primary button" id="theme-blue">Sign Up</a>
+                      <Button className="ui primary button" id="theme-blue">Sign Up</Button>
                       </Link>
                     </div>
                   </div>
