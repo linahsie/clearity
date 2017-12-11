@@ -70,7 +70,7 @@ class Register extends Component {
                          })
                   });
             }
-            
+
             axios.post(_CONFIG.devURL + '/register', {
             name: this.state.user.name,
             email: this.state.user.email,
@@ -99,7 +99,7 @@ class Register extends Component {
                 this.ChangeToStudent();
             }
         }
-        
+
     }
     ChangeToStudent() {
         this.setState({
@@ -158,10 +158,10 @@ class Register extends Component {
                     <Link to="/" className="item" id="logo">Clearity</Link>
                     <div className="right item">
                         <Link to="/login" className="item">
-                      <a className="ui button">Log in</a>
+                      <Button className="ui button">Log in</Button>
                       </Link>
                         <Link to="/register" className="item">
-                      <a className="ui primary button" id="theme-blue">Sign Up</a>
+                      <Button className="ui primary button" id="theme-blue">Sign Up</Button>
                       </Link>
                     </div>
                   </div>

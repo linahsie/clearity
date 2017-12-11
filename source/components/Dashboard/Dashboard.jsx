@@ -128,7 +128,7 @@ class Dashboard extends Component {
                 <Container id="cards-container">
                     <Card.Group>
                         <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
-                        <Card>
+                        <Card className="card-element">
                             <Card.Content>
                               <Card.Description textAlign="right">
                                   <Icon name='circle' color='green'/>Live
@@ -142,7 +142,7 @@ class Dashboard extends Component {
                             </Card.Content>
                         </Card>
                         </Link>
-                        <Card>
+                        <Card className="card-element">
                             <Card.Content>
                               <Card.Description textAlign="right">
                                 <Icon name='circle'/>Offline
@@ -158,7 +158,7 @@ class Dashboard extends Component {
                             </Card.Content>
                         </Card>
                         <Modal size='mini' trigger={
-                        <Card raised>
+                        <Card>
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Create a class</Header>
@@ -180,7 +180,7 @@ class Dashboard extends Component {
           {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
   </Modal>
                         <Modal size='mini' trigger={
-                        <Card raised>
+                        <Card>
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Add a class</Header>
