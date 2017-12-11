@@ -19,3 +19,16 @@
         margin-top: 20px;
     }
 }
+
+#cards-container {
+    display: flex;
+    justify-content: center;
+}
+
+Card {
+    margin: 10px !important;
+}
+
+.card-element {
+    margin: .875em .5em !important;
+}

@@ -20,7 +20,7 @@ class Dashboard extends Component {
         /*
         * GET calls here to populate classes
         */
-        axios.get(`http://localhost:3000/home`)
+        axios.get(`http://localhost:3000/api/home`)
             .then(res => {
             classes = res.map(obj => obj.data);
             this.setState({ classes });
@@ -59,7 +59,7 @@ class Dashboard extends Component {
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to="/" className="" id="logo">Clearity</Link>
+                          <Link to="/dashboard" className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">
@@ -69,22 +69,22 @@ class Dashboard extends Component {
                     </Container>
                 </Menu>
 
-                <Container>
+                <Container id="cards-container">
                     <Card.Group>
                         <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
-                        <Card>
-                            <Card.Content>
-                              <Card.Description textAlign="right">
-                                  <Icon name='circle' color='green'/>Live
-                              </Card.Description>
-                              <Card.Header>CS 498RK</Card.Header>
-                              <Card.Meta>The Art of Web Programming</Card.Meta>
-                              <Card.Description>Molly wants to add you to the group</Card.Description>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <Button basic color='green' fluid>Join</Button>
-                            </Card.Content>
-                        </Card>
+                            <Card className="card-element">
+                                <Card.Content>
+                                  <Card.Description textAlign="right">
+                                      <Icon name='circle' color='green'/>Live
+                                  </Card.Description>
+                                  <Card.Header>CS 498RK</Card.Header>
+                                  <Card.Meta>The Art of Web Programming</Card.Meta>
+                                  <Card.Description>Molly wants to add you to the group</Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <Button basic color='green' fluid>Join</Button>
+                                </Card.Content>
+                            </Card>
                         </Link>
                         <Card>
                             <Card.Content>
