@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Container, Button, Icon, Table } from 'semantic-ui-react'
+import { Header, Container, Button, Icon, Table, Modal, TextArea, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import styles from './Class.scss'
@@ -16,8 +16,12 @@ class InstructorClass extends Component {
             {upvotes: 1, time: 2, question: "Dummy Data 3", student: "Eric Frank"},
         ];
         this.state = {
+            modalOpen: false,
             classId: "",
-            studentQuestion: "",
+            questionFromInst: "",
+            answerOptions: [],
+            questionCount: 2,
+            additionalOptions: [],
             sortColumn: "Upvotes",
             direction: "descending",
             questions: _.sortBy(_dummyData, ["Upvotes"])
@@ -60,15 +64,54 @@ class InstructorClass extends Component {
         )
     }
 
+    handleOpen = () => this.setState({ modalOpen: true })
+
+    handleClose = () => {
+        this.setState({ modalOpen: false });
+        //POST Data to students
+    }
+
+    addOption = () => {
+        let qc = this.state.questionCount + 1;
+        console.log('adding!');
+        const qns = this.state.additionalOptions;
+        this.setState({
+            additionalOptions: qns.concat(<Input key={qc} className='instOption' placeholder='Option'/>),
+            questionCount: qc
+        });
+    }
+
+    generateAdditionalOptions = () => {
+        return  <Input index={3} className='instOption' placeholder='Option'/>
+    }
+
     render() {
+        console.log(this.state.additionalOptions);
         let sortBy = this.state.sortColumn;
         let currentDirection = this.state.direction;
         return(
             <div>
                 <Container className="questionSection">
-                    <Button className="instructorQuestion" onClick={this.askQuestion}>
-                        Ask Question
-                    </Button>
+                    <Modal trigger={<Button  onClick={this.handleOpen} className="instructorQuestion">Ask Question</Button>}
+                    open={this.state.modalOpen} onClose={this.handleClose}>
+                        <Modal.Header>Post a Question</Modal.Header>
+                        <Modal.Content>
+                              <TextArea className="instQuestion" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({questionFromInst: data.value})}/>
+                              <div className='instQnArea'>
+                                  <Input key={0} className='instOption' placeholder='Option'/>
+                                  <Input key={1} className='instOption' placeholder='Option'/>
+                                  {this.state.additionalOptions.map(function(input, index) {
+                                      return input;
+                                  })}
+                              </div>
+                              <Button className='addOption' color='blue' onClick={this.addOption} inverted>Add Option</Button>
+                        </Modal.Content>
+                        <Modal.Actions>
+                          <Button color='green' onClick={this.handleClose} inverted>
+                            Ask
+                          </Button>
+                        </Modal.Actions>
+                    </Modal>
                 </Container>
                 <Container className="questionList">
                     <h3>Current Questions</h3>
@@ -95,7 +138,7 @@ class InstructorClass extends Component {
 InstructorClass.propTypes = {
     classId: PropTypes.string,
     isInstructor: PropTypes.bool,
-    studentQuestion: PropTypes.string,
+    questionFromInst: PropTypes.string,
     questions: PropTypes.array
 }
 
