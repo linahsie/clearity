@@ -211,7 +211,7 @@ Dashboard.propTypes = {
     classes: PropTypes.array,
     isInstructor: PropTypes.bool,
 }
-*/
+/*
 //CODE FOR TEACHER QUESTION
 {/*<Modal size='small' trigger={}>
     <Modal.Header>
@@ -251,5 +251,6 @@ Dashboard.propTypes = {
             </Button>
           </Modal.Actions>
   </Modal>
-*/}
+}*/
+
 export default Dashboard
