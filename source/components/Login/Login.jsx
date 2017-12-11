@@ -37,7 +37,8 @@ class Login extends Component {
             console.log(response);
 //            location.href = '/dashboard';
             component.setState({
-                redirect: true
+                redirect: true,
+                userDetails: response.data
             })
           })
           .catch(function (error) {
@@ -90,7 +91,7 @@ class Login extends Component {
     render() {
         return(
             <div className="wrapper-login">
-              {this.state.redirect ? <Redirect to={{pathname: '/dashboard', state:{user: this.state.user}}}/> :
+              {this.state.redirect ? <Redirect to={{pathname: '/dashboard', state:{user: this.state.userDetails}}}/> :
                 <div className="ui vertical masthead center aligned segment landing-image-login">
                 <div className="ui container">
                   <div className="ui large inverted secondary network menu">

@@ -12,39 +12,46 @@ class Dashboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            classes : [],
+            classes : this.props.location.state.user.classes,
+            classIds : this.props.location.state.user.course_ids,
+            isActive : new Array(this.props.location.state.user.classes.length),
             add_class: '',
-            create_class: ''
+            create_class: '',
+            user: this.props.location.state,
+            isInstructor: this.props.location.state.user.is_instructor
         }
         this.addClass = this.addClass.bind(this);
         this.addCourse = this.addCourse.bind(this);
         this.createClass = this.createClass.bind(this);
         this.createCourse = this.createCourse.bind(this);
-
     }
 
     componentDidMount(){
-         const email = encodeURIComponent(this.props.location.state.user.email);
-         const password = encodeURIComponent(this.props.location.state.user.password);
-         const formData = `email=${email}&password=${password}`;
-
-        axios.post( 'http://localhost:3000/api/login', formData)
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        /*
-        * GET calls here to populate classes
-        */
-        axios.get(`http://localhost:3000/api/home`)
-            .then(res => {
-            classes = res.map(obj => obj.data);
-            this.setState({ classes });
-            console.log(res);
-        });
-
+        //  const email = encodeURIComponent(this.props.location.state.user.email);
+        //  const password = encodeURIComponent(this.props.location.state.user.password);
+        //  const formData = `email=${email}&password=${password}`;
+        //
+        // axios.post( 'http://localhost:3000/api/login', formData)
+        //   .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
+        // /*
+        // * GET calls here to populate classes
+        // */
+        // axios.get(`http://localhost:3000/api/home`)
+        //     .then(res => {
+        //     classes = res.map(obj => obj.data);
+        //     this.setState({ classes });
+        //     console.log(res);
+        // });
+        // if(this.props.location.state.user.is_instructor === false){
+        //     this.props.location.state.user.course_ids.map(function(item, index){
+        //
+        //     })
+        // }
     }
     addClass(e){
         e.preventDefault();
@@ -82,29 +89,74 @@ class Dashboard extends Component {
             create_class: e.target.value
         });
     }
+
+    generateClassCard = (item, index) => {
+        return( <Link key={index} to={{pathname:"/class", state:{title: item, classId: this.state.classIds[index]}}}>
+        <Card className="card-element">
+            <Card.Content>
+              <Card.Description textAlign="right">
+                  <Icon name='circle' color='green'/>Live
+              </Card.Description>
+              <Card.Header>_COURSE CODE_</Card.Header>
+              <Card.Meta>{item}</Card.Meta>
+              <Card.Description>_COURSE TERM_</Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+                <Button id="theme-green" fluid>Join</Button>
+            </Card.Content>
+        </Card>
+    </Link>)
+    }
+
     render() {
-        //const { activeItem } = this.state
-        // console.log(this);
         console.log(this.props.location.state);
-        const isInstructor = this.state.isInstructor;
-
         let additionalCard = null;
-        if (isInstructor) {
-          additionalCard = <Link to="/createClass">
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Create a class</Header>
-                                </Card.Content>
-                            </Link>;
+        if (this.state.isInstructor) {
+          additionalCard = <Modal size='mini' trigger={
+              <Card>
+                      <Card.Content textAlign="center" className="add-create">
+                          <Icon name='plus' color="grey"/>
+                          <Header as='h3' color="grey">Create a class</Header>
+                      </Card.Content>
+              </Card>
+              }>
+              <Modal.Header>
+                  Create a Class
+                </Modal.Header>
+                <Modal.Content>
+                    <Input label="Course Name" onChange={this.createCourse} />
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
+                    <Button>
+                        Cancel
+                    </Button>
+                </Modal.Actions>
+                {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
+          </Modal>
         } else {
-          additionalCard = <Link to="/addClass">
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Add a class</Header>
-                                </Card.Content>
-                            </Link>;
+          additionalCard = <Modal size='mini' trigger={
+              <Card>
+                      <Card.Content textAlign="center" className="add-create">
+                          <Icon name='plus' color="grey"/>
+                          <Header as='h3' color="grey">Add a class</Header>
+                      </Card.Content>
+              </Card>
+          }>
+              <Modal.Header>
+              Add a Class
+              </Modal.Header>
+              <Modal.Content>
+                  <Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
+              </Modal.Content>
+                  <Modal.Actions>
+              <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
+              <Button>
+                Cancel
+              </Button>
+              </Modal.Actions>
+          </Modal>
         }
-
         return(
             <div>
                 <Menu fluid widths={3} borderless stackable>
@@ -157,49 +209,7 @@ class Dashboard extends Component {
                                 </div>
                             </Card.Content>
                         </Card>
-                        <Modal size='mini' trigger={
-                        <Card>
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Create a class</Header>
-                                </Card.Content>
-                        </Card>
-                    }>
-                    <Modal.Header>
-            Create a Class
-          </Modal.Header>
-          <Modal.Content>
-<Input label="Course Name" onChange={this.createCourse} />
-          </Modal.Content>
-          <Modal.Actions>
-            <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
-            <Button>
-              Cancel
-            </Button>
-          </Modal.Actions>
-          {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
-  </Modal>
-                        <Modal size='mini' trigger={
-                        <Card>
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Add a class</Header>
-                                </Card.Content>
-                        </Card>
-                    }>
-                    <Modal.Header>
-            Add a Class
-          </Modal.Header>
-          <Modal.Content>
-<Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
-          </Modal.Content>
-          <Modal.Actions>
-            <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
-            <Button>
-              Cancel
-            </Button>
-          </Modal.Actions>
-  </Modal>
+                        {additionalCard}
                   </Card.Group>
                 </Container>
             </div>
