@@ -35,80 +35,80 @@ class Register extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        // if(this.state.showInstructor===true){
-        //     axios.post('/register', {
-        //     name: this.state.user.name,
-        //     email: this.state.user.email,
-        //     password: this.state.user.password,
-        //     is_instructor: this.state.showInstructor
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //     location.href = '/dashboard';
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //     this.setState({
-        //              message: 'Unable to register'
-        //          })
-        //   });
-        // }
-        // else{
-        //     var id = 0;
-        //     for(id = 1; id < this.user.courses.length; id++){
-        //         axios.put('/add-class', {
-        //             course: this.state.user.courses[i]
-        //           })
-        //           .then(function (response) {
-        //             console.log(response);
-        //           })
-        //           .catch(function (error) {
-        //             console.log(error);
-        //             this.setState({
-        //                      message: 'Unable to register class'
-        //                  })
-        //           });
-        //     }
-            
-        //     axios.post('/register', {
-        //     name: this.state.user.name,
-        //     email: this.state.user.email,
-        //     password: this.state.user.password,
-        //     is_instructor: this.state.showInstructor
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //     location.href = '/dashboard';
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //     this.setState({
-        //              message: 'Unable to register '
-        //          })
-        //   });
-        // }
-        // create a string for an HTTP body message
-        const name = encodeURIComponent(this.state.user.username);
-        const email = encodeURIComponent(this.state.user.email);
-        const password = encodeURIComponent(this.state.user.password);
-        const formData = `name=${name}&email=${email}&password=${password}`;
-
-        // create an AJAX POST request (This should probably done with Axios instead)
-        const xhr = new XMLHttpRequest();
-        xhr.open('post', _CONFIG.devURL);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.responseType = 'json';
-        xhr.addEventListener('load', () => {
-            if (xhr.status === 200) {
-                console.log('The form is valid');
-                location.href = '/dashboard';
-            } else {
-                this.setState({
-                    message: 'Unable to register'
-                })
+        if(this.state.showInstructor===true){
+            axios.post('/register', {
+            name: this.state.user.name,
+            email: this.state.user.email,
+            password: this.state.user.password,
+            is_instructor: this.state.showInstructor
+          })
+          .then(function (response) {
+            console.log(response);
+            location.href = '/dashboard';
+          })
+          .catch(function (error) {
+            console.log(error);
+            this.setState({
+                     message: 'Unable to register'
+                 })
+          });
+        }
+        else{
+            var id = 0;
+            for(id = 1; id < this.user.courses.length; id++){
+                axios.put('/add-class', {
+                    course: this.state.user.courses[i]
+                  })
+                  .then(function (response) {
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                    this.setState({
+                             message: 'Unable to register class'
+                         })
+                  });
             }
-        });
-        xhr.send(formData);
+            
+            axios.post('/register', {
+            name: this.state.user.name,
+            email: this.state.user.email,
+            password: this.state.user.password,
+            is_instructor: this.state.showInstructor
+          })
+          .then(function (response) {
+            console.log(response);
+            location.href = '/dashboard';
+          })
+          .catch(function (error) {
+            console.log(error);
+            this.setState({
+                     message: 'Unable to register '
+                 })
+          });
+        }
+        // // create a string for an HTTP body message
+        // const name = encodeURIComponent(this.state.user.username);
+        // const email = encodeURIComponent(this.state.user.email);
+        // const password = encodeURIComponent(this.state.user.password);
+        // const formData = `name=${name}&email=${email}&password=${password}`;
+
+        // // create an AJAX POST request (This should probably done with Axios instead)
+        // const xhr = new XMLHttpRequest();
+        // xhr.open('post', _CONFIG.devURL);
+        // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // xhr.responseType = 'json';
+        // xhr.addEventListener('load', () => {
+        //     if (xhr.status === 200) {
+        //         console.log('The form is valid');
+        //         location.href = '/dashboard';
+        //     } else {
+        //         this.setState({
+        //             message: 'Unable to register'
+        //         })
+        //     }
+        // });
+        // xhr.send(formData);
     }
     ChangeToStudent() {
         this.setState({
