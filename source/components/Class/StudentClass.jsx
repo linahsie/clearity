@@ -8,8 +8,8 @@ import styles from './Class.scss'
 class StudentClass extends Component {
 
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         let _dummyData = [
             {upvotes: 5, time: 1, question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum. "},
             {upvotes: 3, time: 3, question: "Etiam ex quam, lobortis eu efficitur nec, dictum quis turpis. Morbi non tempor lacus. Aliquam consectetur magna enim, eu dictum quam tempus ac."},
@@ -17,7 +17,7 @@ class StudentClass extends Component {
         ];
         this.state = {
             classId: "",
-            isActive: false,
+            isActive: this.props.active,
             studentQuestion: "",
             sortColumn: "Upvotes",
             direction: "descending",
@@ -92,6 +92,7 @@ class StudentClass extends Component {
     }
 
     render(){
+        console.log(this.state);
         return(
             <div className={this.state.isActive ? '' : 'inactiveHeader'}>
                 {this.state.isActive ? this.renderActive() : <h3>Class is currently not active</h3>}

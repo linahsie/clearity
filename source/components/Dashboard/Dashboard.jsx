@@ -96,13 +96,13 @@ class Dashboard extends Component {
             activeIcon = <Icon name='circle'/>
             activeText = "Offline"
         }
-        return( <Link key={index} to={{pathname:"/class", state:{title: item, classId: this.state.classIds[index]}}}>
+        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.props.location.state.user, classId: this.state.classIds[index], isActive: active}}}>
         <Card className="card-element">
             <Card.Content>
               <Card.Description textAlign="right">
                   {activeIcon}{activeText}
               </Card.Description>
-              <Card.Header>{item}</Card.Header>
+              <Card.Header>{item.toUpperCase()}</Card.Header>
               <br></br>
               <br></br>
             </Card.Content>
@@ -120,7 +120,7 @@ class Dashboard extends Component {
 
           additionalCard = <Modal size='mini'
               open={this.state.modalOpen}
-              onClose={this.handleClose} 
+              onClose={this.handleClose}
               trigger={
               <Card onClick={this.handleOpen}>
                 <Card.Content textAlign="center" className="add-create">
@@ -137,18 +137,16 @@ class Dashboard extends Component {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
-                    <Link to="/dashboard" className="item">
                     <Button onClick={this.handleClose}>
                         Cancel
                     </Button>
-                    </Link>
                 </Modal.Actions>
                 {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
           </Modal>
         } else {
-          additionalCard = <Modal size='mini' 
+          additionalCard = <Modal size='mini'
               open={this.state.modalOpen}
-              onClose={this.handleClose} 
+              onClose={this.handleClose}
               trigger={
               <Card onClick={this.handleOpen}>
                       <Card.Content textAlign="center" className="add-create">
@@ -165,11 +163,9 @@ class Dashboard extends Component {
               </Modal.Content>
                   <Modal.Actions>
               <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
-              <Link to="/dashboard" className="item">
               <Button onClick={this.handleClose}>
                 Cancel
               </Button>
-              </Link>
               </Modal.Actions>
           </Modal>
         }
