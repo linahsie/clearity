@@ -18,7 +18,8 @@ class Dashboard extends Component {
             add_class: '',
             create_class: '',
             user: this.props.location.state,
-            isInstructor: this.props.location.state.user.is_instructor
+            isInstructor: this.props.location.state.user.is_instructor,
+            modalOpen: false
         }
         this.addClass = this.addClass.bind(this);
         this.addCourse = this.addCourse.bind(this);
@@ -53,6 +54,10 @@ class Dashboard extends Component {
         //     })
         // }
     }
+    handleOpen = () => this.setState({ modalOpen: true })
+
+    handleClose = () => this.setState({ modalOpen: false })
+
     addClass(e){
         e.preventDefault();
         axios.put(_CONFIG.devURL + '/add-class', {
@@ -112,12 +117,15 @@ class Dashboard extends Component {
         console.log(this.props.location.state);
         let additionalCard = null;
         if (this.state.isInstructor) {
-          additionalCard = <Modal size='mini' trigger={
-              <Card>
-                      <Card.Content textAlign="center" className="add-create">
-                          <Icon name='plus' color="grey"/>
-                          <Header as='h3' color="grey">Create a class</Header>
-                      </Card.Content>
+          additionalCard = <Modal size='mini'
+              open={this.state.modalOpen}
+              onClose={this.handleClose} 
+              trigger={
+              <Card onClick={this.handleOpen}>
+                <Card.Content textAlign="center" className="add-create">
+                    <Icon name='plus' color="grey"/>
+                    <Header as='h3' color="grey">Create a class</Header>
+                </Card.Content>
               </Card>
               }>
               <Modal.Header>
@@ -129,7 +137,7 @@ class Dashboard extends Component {
                 <Modal.Actions>
                     <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
                     <Link to="/dashboard" className="item">
-                    <Button>
+                    <Button onClick={this.handleClose}>
                         Cancel
                     </Button>
                     </Link>
@@ -137,8 +145,11 @@ class Dashboard extends Component {
                 {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
           </Modal>
         } else {
-          additionalCard = <Modal size='mini' trigger={
-              <Card>
+          additionalCard = <Modal size='mini' 
+              open={this.state.modalOpen}
+              onClose={this.handleClose} 
+              trigger={
+              <Card onClick={this.handleOpen}>
                       <Card.Content textAlign="center" className="add-create">
                           <Icon name='plus' color="grey"/>
                           <Header as='h3' color="grey">Add a class</Header>
@@ -154,7 +165,7 @@ class Dashboard extends Component {
                   <Modal.Actions>
               <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
               <Link to="/dashboard" className="item">
-              <Button>
+              <Button onClick={this.handleClose}>
                 Cancel
               </Button>
               </Link>
