@@ -25,6 +25,7 @@
 
 .questionsTable{
     border-radius: 5px !important;
+    max-width: 100% !important;
 }
 
 .tableHeader{
@@ -39,4 +40,8 @@
 .tabMenu{
     margin: 0 auto 0 auto;
     width: 90% !important;
+}
+
+.inactiveHeader{
+    @include containerCommons;
 }
