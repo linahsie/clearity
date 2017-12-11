@@ -89,6 +89,18 @@ class Register extends Component {
           });
         }
     }
+    componentDidMount(){
+        if(this.props.location.state !== undefined){
+            console.log(this.props);
+            if(this.props.location.state.teacher==true){
+                this.ChangeToInstructor();
+            }
+            else if(this.props.location.state.student==true){
+                this.ChangeToStudent();
+            }
+        }
+        
+    }
     ChangeToStudent() {
         this.setState({
             showStudent: true,
@@ -134,11 +146,10 @@ class Register extends Component {
     onAddBtnClick(event) {
         const inputList = this.state.inputList;
         this.setState({
-            inputList: inputList.concat(<Input label="Course Code" class="pad" onChange={this.onChangeCourses} />)
+            inputList: inputList.concat(<Input label="Course Code" className="pad" onChange={this.onChangeCourses} />)
         });
     }
     render() {
-        console.log(this.props.student)
         return(
             <div className="wrapper-register">
               <div className="ui vertical masthead center aligned segment landing-image-register">
@@ -167,14 +178,10 @@ class Register extends Component {
                             </div>
                             <div className={this.state.showStudent ? '' : 'hidden'}>
                                 <br/>
-                                <Input label="Name" onChange={this.onChangeName} />
-                                <br/><br/>
-                                <Input label="Email" onChange={this.onChangeEmail} />
-                                <br/><br/>
-                                <Input label="Password" onChange={this.onChangePassword} />
-                                <br/><br/>
-                                <Input label="Course Code" onChange={this.onChangeCourses} />
-                                <br/><br/>
+                                <Input label="Name" className = "pad" onChange={this.onChangeName} />
+                                <Input label="Email" className = "pad" onChange={this.onChangeEmail} />
+                                <Input label="Password" className = "pad" onChange={this.onChangePassword} />
+                                <Input label="Course Code" className = "pad" onChange={this.onChangeCourses} />
                                 {this.state.inputList.map(function(input, index) {
                                     return input;
                                 })}
@@ -185,12 +192,9 @@ class Register extends Component {
                             </div>
                             <div className={this.state.showInstructor ? '' : 'hidden'}>
                                 <br/>
-                                <Input label="Name" onChange={this.onChangeName} />
-                                <br/><br/>
-                                <Input label="Email" onChange={this.onChangeEmail} />
-                                <br/><br/>
-                                <Input label="Password" onChange={this.onChangePassword} />
-                                <br/><br/>
+                                <Input label="Name" className = "pad" onChange={this.onChangeName} />
+                                <Input label="Email" className = "pad" onChange={this.onChangeEmail} />
+                                <Input label="Password" className = "pad" onChange={this.onChangePassword} />
                             </div>
                             <p>{this.state.message}</p>
                             <Input type="submit" id="theme-blue"/>
