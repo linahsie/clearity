@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Clearity is a platform to streamline in-class communication between students and educators",
   "main": "index.jsx",
+  "homepage": "https://linahsie.github.io/clearity",
   "scripts": {
     "watch": "webpack -d --watch",
     "build": "webpack",

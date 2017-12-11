@@ -179,11 +179,7 @@ class Dashboard extends Component {
                         </Modal>
                         
                         <Modal size='mini' trigger={
-<<<<<<< HEAD
                             <Card raised>
-=======
-                        <Card>
->>>>>>> 5c5b27cdc338c0e22405ce075f8d686734e20b6c
                                 <Card.Content textAlign="center" className="add-create">
                                     <Icon name='plus' color="grey"/>
                                     <Header as='h3' color="grey">Add a class</Header>
