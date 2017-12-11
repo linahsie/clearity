@@ -125,8 +125,8 @@ class Dashboard extends Component {
                     </Container>
                 </Menu>
 
-                <Container id="cards-container">
-                    <Card.Group>
+                <Container>
+                    <Card.Group id="cards-container">
                         <Link to={{pathname:"/class", state:{title: "The Art of Web Programming", classId: "1a2s3d"}}}>
                         <Card className="card-element">
                             <Card.Content>
