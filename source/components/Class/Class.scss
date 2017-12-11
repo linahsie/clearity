@@ -45,3 +45,9 @@
 .inactiveHeader{
     @include containerCommons;
 }
+
+.instQuestion{
+    font-size: 1.25em;
+    border-radius: 5px !important;
+    width: 100%;
+}

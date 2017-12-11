@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Menu, Container, Segment} from 'semantic-ui-react'
+import { Header, Menu, Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 
@@ -18,7 +18,7 @@ class Class extends Component {
         this.state = {
             classId: this.props.location.state.classId,
             classTitle: this.props.location.state.title,
-            isInstructor: false,
+            isInstructor: true,
             isActive: false,
             activeItem: "session"
         }
