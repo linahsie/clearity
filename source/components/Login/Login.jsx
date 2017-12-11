@@ -27,7 +27,7 @@ class Login extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        axios.post('/login', {
+        axios.post(_CONFIG.devURL + '/login', {
             email: this.state.user.email,
             password: this.state.user.password
           })
