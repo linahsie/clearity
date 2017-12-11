@@ -17,6 +17,17 @@ class Dashboard extends Component {
     }
 
     componentDidMount(){
+         const email = encodeURIComponent(this.props.location.state.user.email);
+         const password = encodeURIComponent(this.props.location.state.user.password);
+         const formData = `email=${email}&password=${password}`;
+
+        axios.post( 'http://localhost:3000/api/login', formData)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         /*
         * GET calls here to populate classes
         */
@@ -24,12 +35,15 @@ class Dashboard extends Component {
             .then(res => {
             classes = res.map(obj => obj.data);
             this.setState({ classes });
+            console.log(res);
         });
+        
     }
 
     render() {
         //const { activeItem } = this.state
-        console.log(this.state.classes);
+        // console.log(this);
+        console.log(this.props.location.state);
         const isInstructor = this.state.isInstructor;
 
         let additionalCard = null;
