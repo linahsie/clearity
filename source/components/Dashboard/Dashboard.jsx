@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Header, Menu, Container, Button, Card, Image, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -7,10 +8,11 @@ import styles from './Dashboard.css'
 
 class Dashboard extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            classes : []
+            classes: [],
+            isInstructor: false
         }
     }
 
@@ -18,17 +20,41 @@ class Dashboard extends Component {
         /*
         * GET calls here to populate classes
         */
+        axios.get(`http://localhost:3000/home`)
+            .then(res => {
+            classes = res.map(obj => obj.data);
+            this.setState({ classes });
+        });
     }
 
     render() {
-        const { activeItem } = this.state
+        //const { activeItem } = this.state
+        console.log(this.state.classes);
+        const isInstructor = this.state.isInstructor;
+
+        let additionalCard = null;
+        if (isInstructor) {
+          additionalCard = <Link to="/createClass">
+                                <Card.Content textAlign="center" className="add-create">
+                                    <Icon name='plus' color="grey"/>
+                                    <Header as='h3' color="grey">Create a class</Header>
+                                </Card.Content>
+                            </Link>;
+        } else {
+          additionalCard = <Link to="/addClass">
+                                <Card.Content textAlign="center" className="add-create">
+                                    <Icon name='plus' color="grey"/>
+                                    <Header as='h3' color="grey">Add a class</Header>
+                                </Card.Content>
+                            </Link>;
+        }
 
         return(
             <div>
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to="/" className="left">
+                          <Link to="/dashboard" className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
@@ -75,22 +101,8 @@ class Dashboard extends Component {
                                 </div>
                             </Card.Content>
                         </Card>
-                        <Card raised>
-                            <Link to="/createClass">
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Create a class</Header>
-                                </Card.Content>
-                            </Link>
-                        </Card>
-                        <Card raised>
-                            <Link to="/addClass">
-                                <Card.Content textAlign="center" className="add-create">
-                                    <Icon name='plus' color="grey"/>
-                                    <Header as='h3' color="grey">Add a class</Header>
-                                </Card.Content>
-                            </Link>
-                        </Card>
+
+                        <Card raised>{additionalCard}</Card>
                   </Card.Group>
                 </Container>
             </div>
@@ -98,10 +110,9 @@ class Dashboard extends Component {
     }
 }
 
-/*
 Dashboard.propTypes = {
     classes: PropTypes.array,
+    isInstructor: PropTypes.bool,
 }
-*/
 
 export default Dashboard

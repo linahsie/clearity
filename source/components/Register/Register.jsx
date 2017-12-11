@@ -95,7 +95,7 @@ class Register extends Component {
 
         // create an AJAX POST request (This should probably done with Axios instead)
         const xhr = new XMLHttpRequest();
-        xhr.open('post', _CONFIG.devURL);
+        xhr.open('post', _CONFIG.devURL + '/register');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.responseType = 'json';
         xhr.addEventListener('load', () => {
