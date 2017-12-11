@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Input, Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import axios from 'axios'
 
 import styles from './Login.scss'
 import * as _CONFIG from '../_config/Config.js'
