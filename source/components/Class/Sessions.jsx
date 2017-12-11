@@ -61,7 +61,10 @@ class Sessions extends Component {
     render(){
         return(
             <div className='sessions'>
-                { this.state.redirect ? <Redirect to="/history" data={{classId: this.state.classId, date: this.state. selectedDate, title: this.state.classTitle}}/> :
+                { this.state.redirect ? <Redirect to={{
+                      pathname: '/history',
+                      data: { classId: this.state.classId, classTitle: this.state.classTitle, date: this.state.selectedDate }
+                    }}/> :
                     this.renderSessions()
                 }
             </div>

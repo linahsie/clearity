@@ -9,6 +9,7 @@ import Login from './components/Login/Login.jsx';
 import Register from './components/Register/Register.jsx';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Class from './components/Class/Class.jsx';
+import ClassHistory from './components/History/ClassHistory.jsx';
 
 // Include any new stylesheets here
 // Note that components' stylesheets should NOT be included here.
@@ -23,6 +24,7 @@ render(
             <Route path="/register" component={Register}/>
             <Route path="/dashboard" component={Dashboard}/>
             <Route path = "/class" component={Class}/>
+            <Route path="/history" component={ClassHistory}/>
         </Switch>
     </Router>,
     document.getElementById('app')
