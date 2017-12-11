@@ -15,6 +15,7 @@ class Class extends Component {
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             classId: this.props.location.state.classId,
             classTitle: this.props.location.state.title,
@@ -28,6 +29,11 @@ class Class extends Component {
 
     switchToCurrentSession = () => {
         this.setState({ activeItem: "session" })
+    }
+
+    onSessionClick = (event, data) => {
+        console.log("CLass");
+        console.log(data);
     }
 
     render() {
@@ -61,7 +67,7 @@ class Class extends Component {
                         {activeItem === 'session' ? (
                             this.state.isInstructor ? <InstructorClass /> : <StudentClass />
                             ) : (
-                            <Sessions  isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                            <Sessions isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession} onSessionClick={this.onSessionClick}/>
                         )}
                     </Segment>
                 </div>

@@ -26,12 +26,16 @@ class Sessions extends Component {
 
     generateButton = (item, index) => {
         return(
-            <li key={index}><Button className="sessionButton">{item}</Button></li>
+            <li key={index}><Button className="sessionButton" value={item} onClick={this.onSessionClick}>{item}</Button></li>
         )
     }
 
     onCurrentSessionClick = () => {
         this.props.onCurrentClick();
+    }
+
+    onSessionClick = (event, data) => {
+        this.props.onSessionClick(event, data);
     }
 
     render(){
