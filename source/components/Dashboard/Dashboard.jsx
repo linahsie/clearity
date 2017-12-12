@@ -115,7 +115,7 @@ class Dashboard extends Component {
         let activeIcon = null
         let activeText = ""
         if(active){
-            activeIcon = <FontAwesome name='circle' color='green'/>
+            activeIcon = <Icon name='circle' color='green'/>
             activeText = "Live"
         }else{
             activeIcon = <Icon name='circle'/>
