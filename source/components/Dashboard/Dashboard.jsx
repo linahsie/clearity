@@ -12,6 +12,7 @@ class Dashboard extends Component {
 
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             user: this.props.location.state.user,
             classes : this.props.location.state.user.classes,
@@ -147,7 +148,8 @@ class Dashboard extends Component {
               trigger={
               <Card onClick={this.handleOpen}>
                 <Card.Content textAlign="center" className="add-create">
-                    <Icon className="our-icon" name='plus' color="grey"/>
+                    {/*<Icon className="our-icon" name='plus' color="grey"/>*/}
+                    <Image size="tiny" src="http://icons.iconarchive.com/icons/icons8/ios7/128/Household-Hammer-icon.png"/>
                     <Header as='h3' color="grey">Create a class</Header>
                 </Card.Content>
               </Card>
@@ -173,7 +175,8 @@ class Dashboard extends Component {
               trigger={
               <Card onClick={this.handleOpen}>
                       <Card.Content textAlign="center" className="add-create">
-                          <Icon name='plus' className="our-icon" color="grey"/>
+                          {/*<Icon className="our-icon" name='plus' color="grey"/>*/}
+                          <Image size="tiny" src="https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/add-128.png"/>
                           <Header as='h3' color="grey">Add a class</Header>
                       </Card.Content>
               </Card>
@@ -197,12 +200,12 @@ class Dashboard extends Component {
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to="/dashboard" className="left">
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to="/dashboard" className="" id="logo">Clearity</Link>
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">

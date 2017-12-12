@@ -37,12 +37,12 @@ class Class extends Component {
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to="/" className="left">
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to="/dashboard" className="" id="logo">Clearity</Link>
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">

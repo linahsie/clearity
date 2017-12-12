@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
+import { Header, Container, Button, TextArea, Table , Icon} from 'semantic-ui-react'
 import _ from 'lodash'
 
 import axios from 'axios'
@@ -101,10 +101,25 @@ class StudentClass extends Component {
 
     }
 
+    upvoteQuestion = (value, index) => {
+        let _url = _CONFIG.devURL + '/upvote';
+        axios.post(_url, {course: this.state.classId, index: index})
+        .then(function(response){
+            console.log(response);
+        }).catch(function(error){console.log(error)})
+        // let questions = this.state.questions;
+        // questions.map(function(entry, index){
+        //     if (entry.question === value){
+        //         entry.upvotes += 1
+        //     }
+        // })
+        // this.setState({questions: questions})
+    }
+
     generateQuestionRow = (questionObj, index) => {
         return (
             <Table.Row key={index}>
-                <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
+                <Table.Cell textAlign='center'>{questionObj.upvotes}  <Icon name="plus" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
                 {/*<Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
             </Table.Row>
