@@ -16,6 +16,7 @@
 
 /* line 23, /Users/linahsie/clearity/source/components/Class/History.scss */
 .sessionButton, .currentSession {
+  color: white;
   width: 100%;
   margin: 5% auto 0 auto !important;
   border-radius: 20px !important; }

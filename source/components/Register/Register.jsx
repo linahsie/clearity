@@ -181,13 +181,6 @@ class Register extends Component {
                                 <Input label="Name" className = "pad" onChange={this.onChangeName} />
                                 <Input label="Email" className = "pad" onChange={this.onChangeEmail} />
                                 <Input type="password" label="Password" className = "pad" onChange={this.onChangePassword} />
-                                <Input label="Course Code" className = "pad" onChange={this.onChangeCourses} />
-                                {this.state.inputList.map(function(input, index) {
-                                    return input;
-                                })}
-                                <div className="ui basic button pad" onClick={this.onAddBtnClick}>
-                                  Add Course
-                                </div>
 
                             </div>
                             <div className={this.state.showInstructor ? '' : 'hidden'}>
@@ -207,5 +200,11 @@ class Register extends Component {
         )
     }
 }
-
+//<Input label="Course Code" className = "pad" onChange={this.onChangeCourses} />
+//                                {this.state.inputList.map(function(input, index) {
+//                                    return input;
+//                                })}
+//                                <div className="ui basic button pad" onClick={this.onAddBtnClick}>
+//                                  Add Course
+//                                </div>
 export default Register
