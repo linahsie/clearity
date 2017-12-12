@@ -57,8 +57,8 @@ class StudentClass extends Component {
 
     componentDidMount(){
         this.refreshQuestions();
-        this.interval = setInterval(this.refreshQuestions, 500);
-        this.intervalActive = setInterval(this.checkActive, 1000);
+        this.interval = setInterval(this.refreshQuestions, 3000);
+        this.intervalActive = setInterval(this.checkActive, 3000);
     }
 
     componentWillUnmount() {

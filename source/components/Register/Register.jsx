@@ -180,7 +180,7 @@ class Register extends Component {
                                 <br/>
                                 <Input label="Name" className = "pad" onChange={this.onChangeName} />
                                 <Input label="Email" className = "pad" onChange={this.onChangeEmail} />
-                                <Input type="password "label="Password" className = "pad" onChange={this.onChangePassword} />
+                                <Input type="password" label="Password" className = "pad" onChange={this.onChangePassword} />
                                 <Input label="Course Code" className = "pad" onChange={this.onChangeCourses} />
                                 {this.state.inputList.map(function(input, index) {
                                     return input;
@@ -194,7 +194,7 @@ class Register extends Component {
                                 <br/>
                                 <Input label="Name" className = "pad" onChange={this.onChangeName} />
                                 <Input label="Email" className = "pad" onChange={this.onChangeEmail} />
-                                <Input label="Password" className = "pad" onChange={this.onChangePassword} />
+                                <Input type="password" label="Password" className = "pad" onChange={this.onChangePassword} />
                             </div>
                             <p>{this.state.message}</p>
                             <Input type="submit" id="theme-blue"/>

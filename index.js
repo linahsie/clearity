@@ -9,7 +9,18 @@ const User = require('./');
 const router = express.Router();
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
-
+var firebase - require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
+require('firebase/storage');
+var config = {
+    apiKey: "AIzaSyAoYPKmxVXl5qpXCfEh0oXlkNTD29yLZaQ",
+    authDomain: "clearity-702b7.firebaseapp.com",
+    databaseURL: "https://clearity-702b7.firebaseio.com",
+    projectId: "clearity-702b7",
+    storageBucket: "clearity-702b7.appspot.com"
+};
+firebase.initializeApp(config);
 app.use(express.static('./backend/static/'));
 app.use(express.static('./frontend/dist/'));
 
