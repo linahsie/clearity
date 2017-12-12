@@ -5,34 +5,74 @@ import _ from 'lodash'
 import { Link, Redirect } from 'react-router-dom'
 
 import styles from './Sessions.scss'
+import axios from 'axios'
+import * as _CONFIG from '../_config/Config.js'
 
 class Sessions extends Component {
 
     constructor(props){
         super(props);
-        let _dummySessionData = ['Dec 6 2017', 'Dec 4 2017', 'Nov 29 2017', 'Nov 27 2017'];
-        let _dummyQuestionData = {
-            'Dec 6 2017': [{qn:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum.", upvotes: 3}, {qn:"sdlfl", upvotes: 2},{qn:"sdsdsfd", upvotes: 1}],
-            'Dec 4 2017': [{qn:"sadfhjlashjdf", upvotes: 5}, {qn:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut", upvotes: 4},{qn:"nmvchdjjsjd", upvotes: 3}],
-            'Nov 29 2017': [{qn:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut", upvotes: 2}, {qn:"m,vbmvgj", upvotes: 3},{qn:"ksfjhsfks", upvotes: 8}],
-            'Nov 27 2017': [{qn:"qyeyrianba", upvotes: 1}, {qn:"cmsnls", upvotes: 2},{qn:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut", upvotes: 9}]
-        };
         this.state = {
             isActive: this.props.isActive,
             classId: this.props.classId,
             classTitle: this.props.classTitle,
-            currentSession: _dummySessionData[0],
-            sessions: _dummySessionData,
-            selectedDate: "",
-            allQuestions: _dummyQuestionData,
-            questions: _dummyQuestionData[_dummySessionData[0]],
+            currentSession: "",
+            sessions: [],
+            allQuestions: {},
+            questions: [],
             user: this.props.user
         }
 
     }
 
+    parseData = (data) => {
+        console.log(data);
+        let dates = [];
+        let allQuestions = {};
+        for (let i = 0; i < data.length; i++){
+            if(data[i].active)
+                continue
+            let sessionEntry = data.length - i + ' - ' + new Date(data[i].date).toDateString();
+            dates.push(sessionEntry);
+            let sessionQuestions = [];
+            let questions = data[i].questions;
+            let upvotes = data[i].upvotes;
+            let ansQuestions = data[i].answeredQuestions;
+            let ansUpvotes = data[i].ansUpvotes;
+            let savedQuestions = data[i].savedQuestions;
+            let savedUpvotes = data[i].savedUpvotes;
+            for(let q = 0; q < questions.length; q++){
+                sessionQuestions.push({qn: questions[q], upvotes: upvotes[q]})
+            }
+            for(let a = 0; a < ansQuestions.length; a++){
+                sessionQuestions.push({qn: ansQuestions[a], upvotes: ansUpvotes[a]})
+            }
+            for(let s = 0; s < savedQuestions.length; s++){
+                sessionQuestions.push({qn: savedQuestions[s], upvotes: savedUpvotes[s]})
+            }
+            allQuestions[sessionEntry] = sessionQuestions
+        }
+        console.log(dates);
+        console.log(allQuestions);
+        this.setState({
+            sessions: dates,
+            currentSession: dates[0],
+            allQuestions: allQuestions,
+            questions: allQuestions[dates[0]]
+        })
+    }
+
     componentDidMount(){
-        //either make calls to API for list of history sessions here or in Class component
+        let _url = _CONFIG.devURL + '/sessions';
+        let component = this;
+        axios.get(_url, {
+            params: {
+              course: this.state.classId
+            }
+          }).then(function(response){
+            let data = response.data.sessions.reverse();
+            component.parseData(data);
+        }).catch(function(error){console.log(error)});
     }
 
     onCurrentSessionClick = () => {
@@ -60,8 +100,8 @@ class Sessions extends Component {
             </Table.Row>
         )
     }
-    
-    
+
+
 
     render(){
         return(

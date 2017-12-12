@@ -163,7 +163,7 @@ class StudentClass extends Component {
         return(
             <div>
                 <h2 className="class_name"> {this.state.className} inactive</h2>
-                <h3>Class is currently not active</h3>}
+                <h3>Class is currently not active</h3>
             </div>
         )
     }
