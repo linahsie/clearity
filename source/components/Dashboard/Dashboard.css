@@ -25,21 +25,41 @@
   width: 50px; }
 
 /* line 28, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+.modalContent {
+  width: 100% !important; }
+
+/* line 32, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+.modalInput {
+  width: 80% !important;
+  margin: 0 auto 0 auto !important; }
+  /* line 35, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+  .modalInput label {
+    max-width: 30% !important; }
+  /* line 38, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+  .modalInput input {
+    max-width: 70% !important; }
+
+/* line 43, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
 #cards-container {
   display: flex;
   justify-content: center !important;
   margin: 0 auto 0 auto !important; }
 
-/* line 34, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+/* line 49, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
 Card {
   margin: 10px !important; }
 
-/* line 38, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+/* line 53, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
 .card-element {
   margin: .875em .5em !important; }
 
-/* line 42, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+/* line 57, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
 .p-10 {
   padding-right: 5px; }
+
+/* line 62, /Users/linahsie/clearity/source/components/Dashboard/Dashboard.scss */
+#invalid-course-id {
+  text-align: center;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=Dashboard.css.map */

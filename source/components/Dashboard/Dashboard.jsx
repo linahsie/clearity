@@ -23,7 +23,8 @@ class Dashboard extends Component {
             create_class: '',
             create_class_code: false,
             isInstructor: this.props.location.state.user.is_instructor,
-            modalOpen: false
+            modalOpen: false,
+            invalidCourseID: false
         }
         this.addClass = this.addClass.bind(this);
         this.addCourse = this.addCourse.bind(this);
@@ -54,7 +55,6 @@ class Dashboard extends Component {
 
     addClass(e){
         e.preventDefault();
-        this.handleClose();
         let component = this;
         let currClass = this.state.classes;
         let currIDs = this.state.classIds;
@@ -69,10 +69,15 @@ class Dashboard extends Component {
               component.setState({
                   classes : response.data.classes,
                   classIds : response.data.course_ids,
-                  user: response.data
+                  user: response.data,
+                  invalidCourseID: false
               });
+              component.handleClose();
           })
-          .catch(function (error) {
+          .catch(function(error) {
+            component.setState({
+                invalidCourseID: true
+            });
             console.log(error);
           });
     }
@@ -138,26 +143,34 @@ class Dashboard extends Component {
             joinButton = <Button disabled={!active} fluid>Join</Button>
         }
         return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.state.user, classId: this.state.classIds[index], className: this.state.classes[index], isActive: active}}}>
-        <Card className="card-element">
-            <Card.Content>
-              <Card.Description textAlign="right">
-                  {activeIcon}{activeText}
-              </Card.Description>
-              <Card.Header>{item.toUpperCase()}</Card.Header>
-              <br></br>
-              <br></br>
-            </Card.Content>
-            <Card.Content extra>
-                {joinButton}
-            </Card.Content>
-        </Card>
-    </Link>)
+            <Card className="card-element">
+                <Card.Content>
+                  <Card.Description textAlign="right">
+                      {activeIcon}{activeText}
+                  </Card.Description>
+                  <Card.Header>{item.toUpperCase()}</Card.Header>
+                  <br></br>
+                  <br></br>
+                </Card.Content>
+                <Card.Content extra>
+                    {joinButton}
+                </Card.Content>
+            </Card>
+        </Link>)
     }
 
     render() {
         let additionalCard = null;
+        let invalidID = this.state.invalidCourseID
+        let invalidIDText = ""
+        console.log(invalidID)
+        if(invalidID) {
+            invalidIDText = "Course ID is invalid"
+        }
+        else {
+            invalidIDText = ""
+        }
         if (this.state.isInstructor) {
-
           additionalCard = <Modal size='mini'
               open={this.state.modalOpen}
               onClose={this.handleClose}
@@ -201,6 +214,7 @@ class Dashboard extends Component {
               </Modal.Header>
               <Modal.Content className='modalContent'>
                   <Input className='modalInput' label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
+                  <div id="invalid-course-id">{invalidIDText}</div>
               </Modal.Content>
                   <Modal.Actions>
               <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
@@ -253,7 +267,7 @@ Dashboard.propTypes = {
           </Modal.Header>
           <Modal.Content>
           What is the purpose?
-<Form>
+          <Form>
         <Form.Field>
         </Form.Field>
         <Form.Field>
