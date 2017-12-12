@@ -165,7 +165,7 @@ class InstructorClass extends Component {
         return(
             <div>
                 <Container className="questionSection">
-                    <Modal trigger={<Button  onClick={this.handleOpen} className="instructorQuestion">Ask Question</Button>}
+                    <Modal trigger={<div onClick={this.handleOpen} className="hidden"></div>}
                     open={this.state.modalOpen} onClose={this.handleClose}>
                         <Modal.Header>Post a Question</Modal.Header>
                         <Modal.Content>
