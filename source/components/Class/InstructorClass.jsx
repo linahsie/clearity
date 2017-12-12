@@ -193,7 +193,6 @@ class InstructorClass extends Component {
                     </Modal>
                 </Container>
                 <Container className="questionList">
-                    <h3>Current Questions</h3>
                     <Table padded striped celled className="questionsTable">
                         <Table.Header className="tableHeader">
                             <Table.Row>

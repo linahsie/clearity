@@ -143,7 +143,6 @@ class StudentClass extends Component {
                     </Button>
                 </Container>
                 <Container className="questionList">
-                    <h3>Current Questions</h3>
                     <Table padded striped celled className="questionsTable">
                         <Table.Header className="tableHeader">
                             <Table.Row>
@@ -160,14 +159,18 @@ class StudentClass extends Component {
             </div>
         )
     }
-
-    render(){
+    renderInactive(){
         return(
             <div>
-            <h2 className="class_name"> {this.state.className} </h2>
-            <div className={this.state.isActive ? '' : 'inactiveHeader'}>
-                {this.state.isActive ? this.renderActive() : <h3>Class is currently not active</h3>}
+                <h2 className="class_name"> {this.state.className} inactive</h2>
+                <h3>Class is currently not active</h3>}
             </div>
+        )
+    }
+    render(){
+        return(
+            <div className={this.state.isActive ? '' : 'inactiveHeader'}>
+                {this.state.isActive ? this.renderActive() : this.renderInactive()}
             </div>
         )
     }
