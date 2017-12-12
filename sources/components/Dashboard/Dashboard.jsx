@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import { Header, Menu, Container, Button, Card, Image, Icon, Modal, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -90,7 +91,7 @@ class Dashboard extends Component {
         let activeIcon = null
         let activeText = ""
         if(active){
-            activeIcon = <Icon name='circle' color='green'/>
+            activeIcon = <FontAwesome name='circle' color='green'/>
             activeText = "Live"
         }else{
             activeIcon = <Icon name='circle'/>
