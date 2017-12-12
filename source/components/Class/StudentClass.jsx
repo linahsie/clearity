@@ -138,7 +138,7 @@ class StudentClass extends Component {
                     <h3>Ask A Question</h3>
                     <TextArea value={this.state.studentQuestion} className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({studentQuestion: data.value})}/>
                     <br></br>
-                    <Button className="submit" onClick={this.askQuestion}>
+                    <Button className="submit_question" onClick={this.askQuestion}>
                         Submit
                     </Button>
                 </Container>
