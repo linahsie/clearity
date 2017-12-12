@@ -107,7 +107,7 @@ class Dashboard extends Component {
               <br></br>
             </Card.Content>
             <Card.Content extra>
-                <Button id="theme-green" fluid>Join</Button>
+                <Button disabled={!active} id="theme-green" fluid>Join</Button>
             </Card.Content>
         </Card>
     </Link>)

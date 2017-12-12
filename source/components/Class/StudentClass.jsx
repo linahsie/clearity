@@ -4,6 +4,7 @@ import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
 
 import styles from './Class.scss'
+import * as _CONFIG from '../_config/Config.js'
 
 class StudentClass extends Component {
 
@@ -16,7 +17,8 @@ class StudentClass extends Component {
             {upvotes: 1, time: 2, question: "Dummy Data 3"},
         ];
         this.state = {
-            classId: "",
+            classId: this.props.classId,
+            user: this.props.user,
             isActive: this.props.active,
             studentQuestion: "",
             sortColumn: "Upvotes",

@@ -59,9 +59,9 @@ class Class extends Component {
 
                     <Segment attached='bottom'>
                         {activeItem === 'session' ? (
-                            this.state.isInstructor ? <InstructorClass active={this.state.isActive}/> : <StudentClass active={this.state.isActive}/>
+                            this.state.isInstructor ? <InstructorClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/> : <StudentClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/>
                             ) : (
-                            <Sessions isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                            <Sessions user={this.props.location.state.user} isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession} />
                         )}
                     </Segment>
                 </div>

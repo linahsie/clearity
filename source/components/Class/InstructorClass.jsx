@@ -3,21 +3,26 @@ import PropTypes from 'prop-types';
 import { Header, Container, Button, Icon, Table, Modal, TextArea, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
+import axios from 'axios'
 import styles from './Class.scss'
+
+import * as _CONFIG from '../_config/Config.js'
 
 class InstructorClass extends Component {
 
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         let _dummyData = [
             {upvotes: 5, time: 1, question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum.", student: "Alan Bob"},
             {upvotes: 3, time: 3, question: "Etiam ex quam, lobortis eu efficitur nec, dictum quis turpis. Morbi non tempor lacus. Aliquam consectetur magna enim, eu dictum quam tempus ac.", student: "Charles Dan"},
             {upvotes: 1, time: 2, question: "Dummy Data 3", student: "Eric Frank"},
         ];
         this.state = {
+            active: this.props.active,
+            user: this.props.user,
             modalOpen: false,
-            classId: "",
+            classId: this.props.classId,
             questionFromInst: "",
             answerOptions: [],
             questionCount: 2,
@@ -85,7 +90,30 @@ class InstructorClass extends Component {
         return  <Input index={3} className='instOption' placeholder='Option'/>
     }
 
+    toggleSession = () => {
+        let active = this.state.active
+        console.log('toggling');
+        let component = this;
+        let _url = _CONFIG.devURL + (active ? "/end-class" : "/start-class");
+        axios.post(_url, {course: this.state.classId, user: this.state.user})
+        .then(function(response){
+            component.setState({
+                active: !active
+            })
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
     render() {
+        if(!this.state.active){
+            return (
+                <div className='sessions'>
+                <Button className="currentSession" onClick={this.toggleSession}>Start Session</Button>
+                </div>
+            )
+        }
         console.log(this.state.additionalOptions);
         let sortBy = this.state.sortColumn;
         let currentDirection = this.state.direction;
@@ -130,6 +158,9 @@ class InstructorClass extends Component {
                        </Table.Body>
                     </Table>
                 </Container>
+                <div className='sessions'>
+                <Button className="currentSession" onClick={this.toggleSession}>End Session</Button>
+                </div>
             </div>
         )
     }
