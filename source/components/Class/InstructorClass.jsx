@@ -87,14 +87,31 @@ class InstructorClass extends Component {
         this.setState({question:""});
     }
 
+    answeredQuestion = (index) => {
+        console.log(index);
+        let _url = _CONFIG.devURL + '/ans-question';
+        axios.post(_url, {index: index, course: this.state.classId})
+        .then(function(response){
+            console.log(response);
+        }).catch(function(error){console.log(error)});
+    }
+
+    saveQuestion = (index) => {
+        let _url = _CONFIG.devURL + '/save-question';
+        axios.post(_url, {index: index, course: this.state.classId})
+        .then(function(response){
+            console.log(response);
+        }).catch(function(error){console.log(error)});
+    }
+
     generateQuestionRow = (questionObj, index) => {
         return (
             <Table.Row key={index}>
                 <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
                 {/*<Table.Cell textAlign='center'>{questionObj.student}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
-                <Table.Cell textAlign='center'>{<Icon name='checkmark' />}</Table.Cell>
-                <Table.Cell textAlign='center'>{<Icon name='wait' />}</Table.Cell>
+                <Table.Cell textAlign='center'>{<Icon name='checkmark' onClick={()=>this.answeredQuestion(index)}/>}</Table.Cell>
+                <Table.Cell textAlign='center'>{<Icon name='wait' onClick={()=>this.saveQuestion(index)}/>}</Table.Cell>
             </Table.Row>
         )
     }
