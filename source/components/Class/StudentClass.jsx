@@ -1,28 +1,70 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
+import { Header, Container, Button, TextArea, Table , Icon} from 'semantic-ui-react'
 import _ from 'lodash'
 
+import axios from 'axios'
 import styles from './Class.scss'
+import * as _CONFIG from '../_config/Config.js'
 
 class StudentClass extends Component {
 
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
-    constructor(){
-        super();
-        let _dummyData = [
-            {upvotes: 5, time: 1, question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum. "},
-            {upvotes: 3, time: 3, question: "Etiam ex quam, lobortis eu efficitur nec, dictum quis turpis. Morbi non tempor lacus. Aliquam consectetur magna enim, eu dictum quam tempus ac."},
-            {upvotes: 1, time: 2, question: "Dummy Data 3"},
-        ];
+    constructor(props){
+        super(props);
         this.state = {
-            classId: "",
-            isActive: false,
+            classId: this.props.classId,
+            user: this.props.user,
+            isActive: this.props.active,
             studentQuestion: "",
             sortColumn: "Upvotes",
             direction: "descending",
-            questions: _.sortBy(_dummyData, ["Upvotes"])
+            questions: []
         }
+    }
+
+    refreshQuestions = () => {
+        if(!this.state.isActive)
+            return;
+        let component = this;
+        let _url = _CONFIG.devURL + '/question';
+        axios.get(_url, {
+            params: {
+              user: this.state.user,
+              course: this.state.classId
+            }
+          })
+          .then(function (response) {
+            let result = [];
+            response.data.questions.map(function(item, index){
+                result.push({upvotes: response.data.upvotes[index], question: item})
+            })
+            component.setState({
+                questions: result
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+    checkActive = () => {
+        let component = this;
+        axios.get(_CONFIG.devURL + '/active').then(function(response){
+            component.setState({isActive: (_.indexOf(response.data.activeClasses, component.state.classId)) !== -1})
+        }).catch(function(error){console.log(error)});
+    }
+
+    componentDidMount(){
+        this.refreshQuestions();
+        this.interval = setInterval(this.refreshQuestions, 500);
+        this.intervalActive = setInterval(this.checkActive, 1000);
+    }
+
+    componentWillUnmount() {
+    // Clear the interval right before component unmount
+        clearInterval(this.interval);
+        clearInterval(this.intervalActive);
     }
 
     sortTable = clickedColumn => () => {
@@ -45,15 +87,40 @@ class StudentClass extends Component {
 
     askQuestion = (event) => {
         event.preventDefault();
-        let question = this.state.studentQuestion;
-        this.setState({studentQuestion:""});
+        let _url = _CONFIG.devURL + "/question"
+        let component = this;
+        axios.post(_url, {
+            question: this.state.studentQuestion,
+            user: this.state.user.user,
+            course: this.state.classId
+        }).then(function(response){
+            component.setState({studentQuestion:""});
+        }).catch(function(error){
+            console.log(error);
+        })
+
+    }
+
+    upvoteQuestion = (value, index) => {
+        let _url = _CONFIG.devURL + '/upvote';
+        axios.post(_url, {course: this.state.classId, index: index})
+        .then(function(response){
+            console.log(response);
+        }).catch(function(error){console.log(error)})
+        // let questions = this.state.questions;
+        // questions.map(function(entry, index){
+        //     if (entry.question === value){
+        //         entry.upvotes += 1
+        //     }
+        // })
+        // this.setState({questions: questions})
     }
 
     generateQuestionRow = (questionObj, index) => {
         return (
             <Table.Row key={index}>
-                <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
-                <Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>
+                <Table.Cell textAlign='center'>{questionObj.upvotes}  <Icon name="plus" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
+                {/*<Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
             </Table.Row>
         )
@@ -66,7 +133,7 @@ class StudentClass extends Component {
             <div>
                 <Container className="questionSection">
                     <h3>Ask A Question</h3>
-                    <TextArea className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({question: data.value})}/>
+                    <TextArea value={this.state.studentQuestion} className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({studentQuestion: data.value})}/>
                     <br></br>
                     <Button className="submit" onClick={this.askQuestion}>
                         Submit
@@ -78,7 +145,7 @@ class StudentClass extends Component {
                         <Table.Header className="tableHeader">
                             <Table.Row>
                                 <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
-                                <Table.HeaderCell sorted={sortBy === 'Time' ? currentDirection : null} onClick={this.sortTable('time')}>Time</Table.HeaderCell>
+                                {/*<Table.HeaderCell sorted={sortBy === 'Time' ? currentDirection : null} onClick={this.sortTable('time')}>Time</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>

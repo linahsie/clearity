@@ -16,10 +16,10 @@ class Class extends Component {
     constructor(props){
         super(props);
         this.state = {
-            classId: "aaa", //this.props.location.state.classId,
-            classTitle: "bbb", //this.props.location.state.title,
-            isInstructor: true,
-            isActive: false,
+            classId: this.props.location.state.classId,
+            classTitle: this.props.location.state.title,
+            isInstructor: this.props.location.state.user.is_instructor,
+            isActive: this.props.location.state.isActive,
             activeItem: "session"
         }
     }
@@ -37,12 +37,12 @@ class Class extends Component {
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to="/" className="left">
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to="/dashboard" className="" id="logo">Clearity</Link>
+                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">
@@ -59,9 +59,9 @@ class Class extends Component {
 
                     <Segment attached='bottom'>
                         {activeItem === 'session' ? (
-                            this.state.isInstructor ? <InstructorClass /> : <StudentClass />
+                            this.state.isInstructor ? <InstructorClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/> : <StudentClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/>
                             ) : (
-                            <Sessions isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession}/>
+                            <Sessions user={this.props.location.state.user} isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession} />
                         )}
                     </Segment>
                 </div>

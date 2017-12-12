@@ -25,7 +25,8 @@ class Sessions extends Component {
             sessions: _dummySessionData,
             selectedDate: "",
             allQuestions: _dummyQuestionData,
-            questions: _dummyQuestionData[_dummySessionData[0]]
+            questions: _dummyQuestionData[_dummySessionData[0]],
+            user: this.props.user
         }
 
     }
