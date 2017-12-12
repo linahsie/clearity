@@ -17,7 +17,7 @@ class Class extends Component {
         super(props);
         this.state = {
             classId: this.props.location.state.classId,
-            classTitle: this.props.location.state.title,
+            classTitle: this.props.location.state.className,
             isInstructor: this.props.location.state.user.is_instructor,
             isActive: this.props.location.state.isActive,
             activeItem: "session"
@@ -59,7 +59,7 @@ class Class extends Component {
 
                     <Segment attached='bottom'>
                         {activeItem === 'session' ? (
-                            this.state.isInstructor ? <InstructorClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/> : <StudentClass classId={this.state.classId} active={this.state.isActive} user={this.props.location.state.user}/>
+                            this.state.isInstructor ? <InstructorClass classId={this.state.classId} className={this.state.classTitle} active={this.state.isActive} user={this.props.location.state.user}/> : <StudentClass classId={this.state.classId} className={this.state.classTitle} active={this.state.isActive} user={this.props.location.state.user}/>
                             ) : (
                             <Sessions user={this.props.location.state.user} isActive={this.state.isActive} classTitle={this.state.classTitle} classId={this.state.classId} onCurrentClick={this.switchToCurrentSession} />
                         )}

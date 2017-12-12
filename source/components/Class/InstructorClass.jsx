@@ -158,7 +158,7 @@ class InstructorClass extends Component {
         if(!this.state.active){
             return (
                 <div className='sessions'>
-                <h2> {this.state.className} </h2>
+                <h2 className="class_name"> {this.state.className} </h2>
                 <div className="courseID"> Course ID: {this.state.classId}</div>
                 <Button className="currentSession" onClick={this.toggleSession}>Start Session</Button>
                 </div>
@@ -168,6 +168,7 @@ class InstructorClass extends Component {
         let currentDirection = this.state.direction;
         return(
             <div>
+                <h2 className="class_name"> {this.state.className} </h2>
                 <div className="courseID"> Course ID: {this.state.classId}</div>
                 <Container className="questionSection">
                     <Modal trigger={<div onClick={this.handleOpen} className="hidden"></div>}

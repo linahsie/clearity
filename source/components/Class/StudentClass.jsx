@@ -17,6 +17,7 @@ class StudentClass extends Component {
             classId: this.props.classId,
             user: this.props.user,
             isActive: this.props.active,
+            className: this.props.className,
             studentQuestion: "",
             sortColumn: "Upvotes",
             direction: "descending",
@@ -132,6 +133,7 @@ class StudentClass extends Component {
         let currentDirection = this.state.direction;
         return(
             <div>
+                <h2 className="class_name"> {this.state.className} </h2>
                 <Container className="questionSection">
                     <h3>Ask A Question</h3>
                     <TextArea value={this.state.studentQuestion} className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({studentQuestion: data.value})}/>
@@ -161,8 +163,11 @@ class StudentClass extends Component {
 
     render(){
         return(
+            <div>
+            <h2 className="class_name"> {this.state.className} </h2>
             <div className={this.state.isActive ? '' : 'inactiveHeader'}>
                 {this.state.isActive ? this.renderActive() : <h3>Class is currently not active</h3>}
+            </div>
             </div>
         )
     }
