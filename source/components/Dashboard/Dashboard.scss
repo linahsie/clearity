@@ -25,6 +25,21 @@
 	width: 50px;
 }
 
+.modalContent{
+	width: 100% !important;
+}
+
+.modalInput{
+	width: 80% !important;
+	margin: 0 auto 0 auto !important;
+	label{
+		max-width: 30% !important;
+	}
+	input{
+		max-width: 70% !important;
+	}
+}
+
 #cards-container {
     display: flex;
     justify-content: center !important;

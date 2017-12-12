@@ -173,8 +173,8 @@ class Dashboard extends Component {
               <Modal.Header>
                   Create a Class
                 </Modal.Header>
-                <Modal.Content>
-                    <Input label="Course Name" onChange={this.createCourse} />
+                <Modal.Content className='modalContent'>
+                    <Input className='modalInput' label="Course Name" onChange={this.createCourse} />
                 </Modal.Content>
                 <Modal.Actions>
                     <Button id="theme-blue" onClick={this.createClass}>Create Class</Button>
@@ -199,8 +199,8 @@ class Dashboard extends Component {
               <Modal.Header>
               Add a Class
               </Modal.Header>
-              <Modal.Content>
-                  <Input label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
+              <Modal.Content className='modalContent'>
+                  <Input className='modalInput' label="Course Code" text="Enter your Course Entry Code" onChange={this.addCourse} />
               </Modal.Content>
                   <Modal.Actions>
               <Button id="theme-blue" onClick={this.addClass}>Add Class</Button>
