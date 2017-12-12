@@ -53,6 +53,7 @@ class Dashboard extends Component {
 
     addClass(e){
         e.preventDefault();
+        this.handleClose();
         let component = this;
         let currClass = this.state.classes;
         let currIDs = this.state.classIds;
@@ -65,8 +66,9 @@ class Dashboard extends Component {
               currClass.push(response.data);
               currIDs.push(component.state.add_class);
               component.setState({
-                  classes : currClass,
-                  classIds : currIDs
+                  classes : response.data.classes,
+                  classIds : response.data.course_ids,
+                  user: response.data
               });
           })
           .catch(function (error) {
@@ -208,12 +210,12 @@ class Dashboard extends Component {
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="left">
+                          <Link to={{pathname:"/dashboard", state: this.state}} className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="" id="logo">Clearity</Link>
+                          <Link to={{pathname:"/dashboard", state: this.state}} className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">
