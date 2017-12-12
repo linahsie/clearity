@@ -127,9 +127,9 @@ class Sessions extends Component {
                                   </Table.Row>
                               </Table.Header>
                               <Table.Body>
-                                  {this.state.questions
+                                  {this.state.questions ? this.state.questions
                                       .sort((a, b) => a.upvotes < b.upvotes)
-                                      .map(this.generateQuestionRow)}
+                                      .map(this.generateQuestionRow) : null}
                               </Table.Body>
                          </Table>
                       </Segment>
