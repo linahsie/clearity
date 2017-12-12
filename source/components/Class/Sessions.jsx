@@ -60,6 +60,8 @@ class Sessions extends Component {
             </Table.Row>
         )
     }
+    
+    
 
     render(){
         return(
@@ -80,12 +82,14 @@ class Sessions extends Component {
                           <Table sortable padded striped celled className="questionsTable">
                               <Table.Header className="tableHeader">
                                   <Table.Row>
-                                      <Table.HeaderCell>Question</Table.HeaderCell>
-                                      <Table.HeaderCell >Upvotes</Table.HeaderCell>
+                                      <Table.HeaderCell>Upvotes</Table.HeaderCell>
+                                      <Table.HeaderCell >Questions</Table.HeaderCell>
                                   </Table.Row>
                               </Table.Header>
                               <Table.Body>
-                                  {this.state.questions.map(this.generateQuestionRow)}
+                                  {this.state.questions
+                                      .sort((a, b) => a.upvotes < b.upvotes)
+                                      .map(this.generateQuestionRow)}
                               </Table.Body>
                          </Table>
                       </Segment>
