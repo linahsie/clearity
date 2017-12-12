@@ -55,7 +55,7 @@ class InstructorClass extends Component {
 
     componentDidMount(){
         this.refreshQuestions();
-        this.interval = setInterval(this.refreshQuestions, 3000);
+        this.interval = setInterval(this.refreshQuestions, 1000);
     }
 
     componentWillUnmount() {
