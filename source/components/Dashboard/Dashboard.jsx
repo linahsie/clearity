@@ -13,7 +13,6 @@ class Dashboard extends Component {
 
     constructor(props){
         super(props);
-        console.log(props);
         this.state = {
             user: this.props.location.state.user,
             classes : this.props.location.state.user.classes,
@@ -41,12 +40,11 @@ class Dashboard extends Component {
 
     componentDidMount(){
         this.updateActive();
-        this.interval = setInterval(this.updateActive(), 500);
+        this.interval = setInterval(this.updateActive, 5000);
     }
 
     componentWillUnmount(){
-        console.log('unmount');
-        clearInterval(this.setInterval);
+        clearInterval(this.interval);
     }
 
     handleOpen = () => this.setState({ modalOpen: true })
@@ -84,16 +82,22 @@ class Dashboard extends Component {
 
     createClass(e){
         e.preventDefault();
+        this.handleClose();
+        let component = this;
         axios.post(_CONFIG.devURL + '/create-class', {
             course: this.state.create_class,
-            user: this.state.user
+            user: this.state.user.user
           })
           .then(function (response) {
             console.log(response);
-            //returns course code
+            component.setState({
+                classes : response.data.user.classes,
+                classIds : response.data.user.course_ids
+            })
 
           })
           .catch(function (error) {
+              console.log('error');
             console.log(error);
           });
     }
@@ -142,7 +146,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.props.location.state);
         let additionalCard = null;
         if (this.state.isInstructor) {
 

@@ -62,6 +62,7 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-icon": "^2.2.12",
     "semantic-ui-react": "^0.76.0",
-    "validator": "^9.1.1"
+    "validator": "^9.1.1",
+    "firebase": "^3.0.1"
   }
 }
