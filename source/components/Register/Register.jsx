@@ -56,9 +56,9 @@ class Register extends Component {
         }
         else{
             var id = 0;
-            for(id = 1; id < this.user.courses.length; id++){
+            for(id = 1; id < this.state.user.courses.length; id++){
                 axios.put(_CONFIG.devURL + '/add-class', {
-                    course: this.state.user.courses[i]
+                    course: this.state.user.courses[id]
                   })
                   .then(function (response) {
                     console.log(response);

@@ -190,10 +190,10 @@ class InstructorClass extends Component {
                     <Table padded striped celled className="questionsTable">
                         <Table.Header className="tableHeader">
                             <Table.Row>
-                                <Table.HeaderCell className="pointer" sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvoted</Table.HeaderCell>
+                                <Table.HeaderCell className="pointer" sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
                                 {/*<Table.HeaderCell sorted={sortBy === 'Asked' ? currentDirection : null} onClick={this.sortTable('student')}>Asked By</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
-                                <Table.HeaderCell>Answered</Table.HeaderCell>
+                                <Table.HeaderCell>Answer</Table.HeaderCell>
                                 <Table.HeaderCell>Save</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
