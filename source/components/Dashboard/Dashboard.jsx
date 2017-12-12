@@ -21,6 +21,7 @@ class Dashboard extends Component {
             isActive : [],
             add_class: '',
             create_class: '',
+            create_class_code: false,
             isInstructor: this.props.location.state.user.is_instructor,
             modalOpen: false
         }
@@ -49,7 +50,7 @@ class Dashboard extends Component {
 
     handleOpen = () => this.setState({ modalOpen: true })
 
-    handleClose = () => this.setState({ modalOpen: false })
+    handleClose = () => this.setState({ modalOpen: false, create_class: false })
 
     addClass(e){
         e.preventDefault();
@@ -91,7 +92,12 @@ class Dashboard extends Component {
             user: this.state.user
           })
           .then(function (response) {
+            console.log("class ids")
             console.log(response);
+            console.log("done")
+            component.setState({
+              create_class_code: true
+            })
             component.setState({
                 user: response.data.user,
                 classes : response.data.user.classes,
@@ -131,7 +137,7 @@ class Dashboard extends Component {
             activeText = "Offline"
             joinButton = <Button disabled={!active} fluid>Join</Button>
         }
-        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.state.user, classId: this.state.classIds[index], isActive: active}}}>
+        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.state.user, classId: this.state.classIds[index], className: this.state.classes[index], isActive: active}}}>
         <Card className="card-element">
             <Card.Content>
               <Card.Description textAlign="right">
@@ -176,7 +182,6 @@ class Dashboard extends Component {
                         Cancel
                     </Button>
                 </Modal.Actions>
-                {this.state.add_class==='' ? '' : <div>Course Created: {this.state.add_class}</div>}
           </Modal>
         } else {
           additionalCard = <Modal size='mini'

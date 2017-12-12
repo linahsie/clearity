@@ -18,6 +18,7 @@ class InstructorClass extends Component {
             user: this.props.user,
             modalOpen: false,
             classId: this.props.classId,
+            className: this.props.className,
             questionFromInst: "",
             answerOptions: [],
             questionCount: 2,
@@ -56,6 +57,8 @@ class InstructorClass extends Component {
     componentDidMount(){
         this.refreshQuestions();
         this.interval = setInterval(this.refreshQuestions, 1000);
+        console.log("course name")
+        console.log(this.state.className)
     }
 
     componentWillUnmount() {
@@ -155,6 +158,8 @@ class InstructorClass extends Component {
         if(!this.state.active){
             return (
                 <div className='sessions'>
+                <h2> {this.state.className} </h2>
+                <div className="courseID"> Course ID: {this.state.classId}</div>
                 <Button className="currentSession" onClick={this.toggleSession}>Start Session</Button>
                 </div>
             )
@@ -163,6 +168,7 @@ class InstructorClass extends Component {
         let currentDirection = this.state.direction;
         return(
             <div>
+                <div className="courseID"> Course ID: {this.state.classId}</div>
                 <Container className="questionSection">
                     <Modal trigger={<div onClick={this.handleOpen} className="hidden"></div>}
                     open={this.state.modalOpen} onClose={this.handleClose}>
@@ -211,6 +217,7 @@ class InstructorClass extends Component {
 }
 
 InstructorClass.propTypes = {
+    className: PropTypes.string,
     classId: PropTypes.string,
     isInstructor: PropTypes.bool,
     questionFromInst: PropTypes.string,
