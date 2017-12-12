@@ -88,7 +88,7 @@ class Register extends Component {
                  })
           });
         }
-    }
+    
     componentDidMount(){
         if(this.props.location.state !== undefined){
             console.log(this.props);
