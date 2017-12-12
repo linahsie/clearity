@@ -119,7 +119,7 @@ class StudentClass extends Component {
     generateQuestionRow = (questionObj, index) => {
         return (
             <Table.Row key={index}>
-                <Table.Cell textAlign='center'>{questionObj.upvotes}  <Icon name="plus" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
+                <Table.Cell textAlign='center'>{questionObj.upvotes}  <img src="https://png.icons8.com/sort-up/win8/64/000000" className="upvote icons" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
                 {/*<Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
             </Table.Row>

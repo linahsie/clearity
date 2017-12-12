@@ -110,8 +110,8 @@ class InstructorClass extends Component {
                 <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
                 {/*<Table.Cell textAlign='center'>{questionObj.student}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
-                <Table.Cell textAlign='center'>{<Icon name='checkmark' onClick={()=>this.answeredQuestion(index)}/>}</Table.Cell>
-                <Table.Cell textAlign='center'>{<Icon name='wait' onClick={()=>this.saveQuestion(index)}/>}</Table.Cell>
+                <Table.Cell textAlign='center'>{<img src="https://png.icons8.com/ok/ios7/30/000000" className="icons" onClick={()=>this.answeredQuestion(index)}/>}</Table.Cell>
+                <Table.Cell textAlign='center'>{<img src="https://png.icons8.com/clock/win10/30/000000" className="icons" onClick={()=>this.saveQuestion(index)}/>}</Table.Cell>
             </Table.Row>
         )
     }
@@ -191,7 +191,7 @@ class InstructorClass extends Component {
                     <Table sortable padded striped celled className="questionsTable">
                         <Table.Header className="tableHeader">
                             <Table.Row>
-                                <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
+                                <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvoted</Table.HeaderCell>
                                 {/*<Table.HeaderCell sorted={sortBy === 'Asked' ? currentDirection : null} onClick={this.sortTable('student')}>Asked By</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
                                 <Table.HeaderCell>Answered</Table.HeaderCell>

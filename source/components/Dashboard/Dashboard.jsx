@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import { Header, Menu, Container, Button, Card, Image, Icon, Modal, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -8,6 +7,7 @@ import _ from 'lodash'
 import * as _CONFIG from '../_config/Config.js'
 
 import styles from './Dashboard.scss'
+import styles2 from '../../assets/font-awesome/css/font-awesome.min.css'
 
 class Dashboard extends Component {
 
@@ -114,12 +114,15 @@ class Dashboard extends Component {
         let active = _.indexOf(this.state.isActive, this.state.classIds[index]) !== -1;
         let activeIcon = null
         let activeText = ""
+        let joinButton = null
         if(active){
-            activeIcon = <Icon name='circle' color='green'/>
+            activeIcon = <img className="p-10" src="https://png.icons8.com/filled-circle/p1em/10/2ecc71"/>
             activeText = "Live"
+            joinButton = <Button id="theme-green" fluid>Join</Button>
         }else{
-            activeIcon = <Icon name='circle'/>
+            activeIcon = <img className="p-10" src="https://png.icons8.com/filled-circle/p1em/10/666666"/>
             activeText = "Offline"
+            joinButton = <Button disabled={!active} fluid>Join</Button>
         }
         return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.props.location.state.user, classId: this.state.classIds[index], isActive: active}}}>
         <Card className="card-element">
@@ -132,7 +135,7 @@ class Dashboard extends Component {
               <br></br>
             </Card.Content>
             <Card.Content extra>
-                <Button disabled={!active} id="theme-green" fluid>Join</Button>
+                {joinButton}
             </Card.Content>
         </Card>
     </Link>)
