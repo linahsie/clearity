@@ -120,7 +120,7 @@ class StudentClass extends Component {
     generateQuestionRow = (questionObj, index) => {
         return (
             <Table.Row key={index}>
-                <Table.Cell textAlign='center'>{questionObj.upvotes}  <img src="https://png.icons8.com/sort-up/win8/64/000000" className="upvote icons" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
+                <Table.Cell textAlign='center'>{questionObj.upvotes}  <img src="https://png.icons8.com/sort-up/win8/64/000000" className="upvote pointer" onClick={()=>this.upvoteQuestion(questionObj.question, index)}/></Table.Cell>
                 {/*<Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
             </Table.Row>
@@ -142,10 +142,10 @@ class StudentClass extends Component {
                 </Container>
                 <Container className="questionList">
                     <h3>Current Questions</h3>
-                    <Table sortable padded striped celled className="questionsTable">
+                    <Table padded striped celled className="questionsTable">
                         <Table.Header className="tableHeader">
                             <Table.Row>
-                                <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
+                                <Table.HeaderCell className="pointer" sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
                                 {/*<Table.HeaderCell sorted={sortBy === 'Time' ? currentDirection : null} onClick={this.sortTable('time')}>Time</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
                             </Table.Row>
