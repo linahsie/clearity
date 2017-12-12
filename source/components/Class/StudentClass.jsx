@@ -12,11 +12,6 @@ class StudentClass extends Component {
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
     constructor(props){
         super(props);
-        let _dummyData = [
-            {upvotes: 5, time: 1, question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum. "},
-            {upvotes: 3, time: 3, question: "Etiam ex quam, lobortis eu efficitur nec, dictum quis turpis. Morbi non tempor lacus. Aliquam consectetur magna enim, eu dictum quam tempus ac."},
-            {upvotes: 1, time: 2, question: "Dummy Data 3"},
-        ];
         this.state = {
             classId: this.props.classId,
             user: this.props.user,
@@ -24,8 +19,52 @@ class StudentClass extends Component {
             studentQuestion: "",
             sortColumn: "Upvotes",
             direction: "descending",
-            questions: _.sortBy(_dummyData, ["Upvotes"])
+            questions: []
         }
+    }
+
+    refreshQuestions = () => {
+        if(!this.state.isActive)
+            return;
+        let component = this;
+        let _url = _CONFIG.devURL + '/question';
+        axios.get(_url, {
+            params: {
+              user: this.state.user,
+              course: this.state.classId
+            }
+          })
+          .then(function (response) {
+            let result = [];
+            response.data.questions.map(function(item, index){
+                result.push({upvotes: response.data.upvotes[index], question: item})
+            })
+            component.setState({
+                questions: result
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+    checkActive = () => {
+        let component = this;
+        axios.get(_CONFIG.devURL + '/active').then(function(response){
+            component.setState({isActive: (_.indexOf(response.data.activeClasses, component.state.classId)) !== -1})
+        }).catch(function(error){console.log(error)});
+    }
+
+    componentDidMount(){
+        this.refreshQuestions();
+        this.interval = setInterval(this.refreshQuestions, 500);
+        this.intervalActive = setInterval(this.checkActive, 1000);
+    }
+
+    componentWillUnmount() {
+    // Clear the interval right before component unmount
+        clearInterval(this.interval);
+        clearInterval(this.intervalActive);
     }
 
     sortTable = clickedColumn => () => {
@@ -66,7 +105,7 @@ class StudentClass extends Component {
         return (
             <Table.Row key={index}>
                 <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
-                <Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>
+                {/*<Table.Cell textAlign='center'>{questionObj.time}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
             </Table.Row>
         )
@@ -91,7 +130,7 @@ class StudentClass extends Component {
                         <Table.Header className="tableHeader">
                             <Table.Row>
                                 <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
-                                <Table.HeaderCell sorted={sortBy === 'Time' ? currentDirection : null} onClick={this.sortTable('time')}>Time</Table.HeaderCell>
+                                {/*<Table.HeaderCell sorted={sortBy === 'Time' ? currentDirection : null} onClick={this.sortTable('time')}>Time</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -105,7 +144,6 @@ class StudentClass extends Component {
     }
 
     render(){
-        console.log(this.state);
         return(
             <div className={this.state.isActive ? '' : 'inactiveHeader'}>
                 {this.state.isActive ? this.renderActive() : <h3>Class is currently not active</h3>}

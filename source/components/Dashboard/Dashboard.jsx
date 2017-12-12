@@ -29,11 +29,22 @@ class Dashboard extends Component {
         this.createCourse = this.createCourse.bind(this);
     }
 
-    componentDidMount(){
+    updateActive = () => {
+        console.log('checking');
         let component = this;
         axios.get(_CONFIG.devURL + '/active').then(function(response){
             component.setState({isActive: response.data.activeClasses})
         });
+    }
+
+    componentDidMount(){
+        this.updateActive();
+        this.interval = setInterval(this.updateActive(), 500);
+    }
+
+    componentWillUnmount(){
+        console.log('unmount');
+        clearInterval(this.setInterval);
     }
 
     handleOpen = () => this.setState({ modalOpen: true })

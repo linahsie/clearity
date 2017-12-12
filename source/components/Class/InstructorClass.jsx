@@ -13,11 +13,6 @@ class InstructorClass extends Component {
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
     constructor(props){
         super(props);
-        let _dummyData = [
-            {upvotes: 5, time: 1, question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ex nisl. Morbi malesuada erat non dui tristique pulvinar. Vestibulum at feugiat leo, eu tristique ante. In diam ex, accumsan vel turpis ut, feugiat lobortis ipsum.", student: "Alan Bob"},
-            {upvotes: 3, time: 3, question: "Etiam ex quam, lobortis eu efficitur nec, dictum quis turpis. Morbi non tempor lacus. Aliquam consectetur magna enim, eu dictum quam tempus ac.", student: "Charles Dan"},
-            {upvotes: 1, time: 2, question: "Dummy Data 3", student: "Eric Frank"},
-        ];
         this.state = {
             active: this.props.active,
             user: this.props.user,
@@ -29,8 +24,43 @@ class InstructorClass extends Component {
             additionalOptions: [],
             sortColumn: "Upvotes",
             direction: "descending",
-            questions: _.sortBy(_dummyData, ["Upvotes"])
+            questions: []
         }
+    }
+
+    refreshQuestions = () => {
+        if(!this.state.active)
+            return;
+        let component = this;
+        let _url = _CONFIG.devURL + '/question';
+        axios.get(_url, {
+            params: {
+              user: this.state.user,
+              course: this.state.classId
+            }
+          })
+          .then(function (response) {
+            let result = [];
+            response.data.questions.map(function(item, index){
+                result.push({upvotes: response.data.upvotes[index], question: item})
+            })
+            component.setState({
+                questions: result
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+    componentDidMount(){
+        this.refreshQuestions();
+        this.interval = setInterval(this.refreshQuestions, 500);
+    }
+
+    componentWillUnmount() {
+    // Clear the interval right before component unmount
+        clearInterval(this.interval);
     }
 
     sortTable = clickedColumn => () => {
@@ -61,7 +91,7 @@ class InstructorClass extends Component {
         return (
             <Table.Row key={index}>
                 <Table.Cell textAlign='center'>{questionObj.upvotes}</Table.Cell>
-                <Table.Cell textAlign='center'>{questionObj.student}</Table.Cell>
+                {/*<Table.Cell textAlign='center'>{questionObj.student}</Table.Cell>*/}
                 <Table.Cell>{questionObj.question}</Table.Cell>
                 <Table.Cell textAlign='center'>{<Icon name='checkmark' />}</Table.Cell>
                 <Table.Cell textAlign='center'>{<Icon name='wait' />}</Table.Cell>
@@ -145,7 +175,7 @@ class InstructorClass extends Component {
                         <Table.Header className="tableHeader">
                             <Table.Row>
                                 <Table.HeaderCell sorted={sortBy === 'Upvotes' ? currentDirection : null} onClick={this.sortTable('upvotes')}>Upvotes</Table.HeaderCell>
-                                <Table.HeaderCell sorted={sortBy === 'Asked' ? currentDirection : null} onClick={this.sortTable('student')}>Asked By</Table.HeaderCell>
+                                {/*<Table.HeaderCell sorted={sortBy === 'Asked' ? currentDirection : null} onClick={this.sortTable('student')}>Asked By</Table.HeaderCell>*/}
                                 <Table.HeaderCell>Question</Table.HeaderCell>
                                 <Table.HeaderCell>Answered</Table.HeaderCell>
                                 <Table.HeaderCell>Save</Table.HeaderCell>
