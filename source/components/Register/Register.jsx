@@ -45,7 +45,7 @@ class Register extends Component {
           })
           .then(function (response) {
             console.log(response);
-            location.href = '/dashboard';
+            location.href = '/login';
           })
           .catch(function (error) {
             console.log(error);
@@ -79,7 +79,7 @@ class Register extends Component {
           })
           .then(function (response) {
             console.log(response);
-            location.href = '/dashboard';
+            location.href = '/login';
           })
           .catch(function (error) {
             console.log(error);

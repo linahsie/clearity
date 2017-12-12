@@ -83,7 +83,7 @@
   margin-left: 5px; }
 
 /* line 81, /Users/linahsie/clearity/source/components/Class/Class.scss */
-.icons {
-  cursor: pointer; }
+.pointer {
+  cursor: pointer !important; }
 
 /*# sourceMappingURL=Class.css.map */
