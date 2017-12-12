@@ -13,6 +13,7 @@ class Dashboard extends Component {
 
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             user: this.props.location.state.user,
             classes : this.props.location.state.user.classes,
@@ -20,7 +21,6 @@ class Dashboard extends Component {
             isActive : [],
             add_class: '',
             create_class: '',
-            user: this.props.location.state,
             isInstructor: this.props.location.state.user.is_instructor,
             modalOpen: false
         }
@@ -53,20 +53,22 @@ class Dashboard extends Component {
 
     addClass(e){
         e.preventDefault();
+        this.handleClose();
         let component = this;
         let currClass = this.state.classes;
         let currIDs = this.state.classIds;
         axios.put(_CONFIG.devURL + '/add-class', {
             course: this.state.add_class,
-            user: this.state.user.user
+            user: this.state.user,
           })
           .then(function (response) {
               console.log(response);
               currClass.push(response.data);
               currIDs.push(component.state.add_class);
               component.setState({
-                  classes : currClass,
-                  classIds : currIDs
+                  classes : response.data.classes,
+                  classIds : response.data.course_ids,
+                  user: response.data
               });
           })
           .catch(function (error) {
@@ -86,11 +88,12 @@ class Dashboard extends Component {
         let component = this;
         axios.post(_CONFIG.devURL + '/create-class', {
             course: this.state.create_class,
-            user: this.state.user.user
+            user: this.state.user
           })
           .then(function (response) {
             console.log(response);
             component.setState({
+                user: response.data.user,
                 classes : response.data.user.classes,
                 classIds : response.data.user.course_ids
             })
@@ -128,7 +131,7 @@ class Dashboard extends Component {
             activeText = "Offline"
             joinButton = <Button disabled={!active} fluid>Join</Button>
         }
-        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.props.location.state.user, classId: this.state.classIds[index], isActive: active}}}>
+        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.state.user, classId: this.state.classIds[index], isActive: active}}}>
         <Card className="card-element">
             <Card.Content>
               <Card.Description textAlign="right">
@@ -207,12 +210,12 @@ class Dashboard extends Component {
                 <Menu fluid widths={3} borderless stackable>
                     <Container>
                         <Menu.Item>
-                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="left">
+                          <Link to={{pathname:"/dashboard", state: this.state}} className="left">
                               <Header as='h3'>Home</Header>
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <Link to={{pathname:"/dashboard", state: this.props.location.state}} className="" id="logo">Clearity</Link>
+                          <Link to={{pathname:"/dashboard", state: this.state}} className="" id="logo">Clearity</Link>
                         </Menu.Item>
                         <Menu.Item>
                           <Link to="/login" className="right">

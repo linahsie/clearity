@@ -12,6 +12,7 @@ class StudentClass extends Component {
     // Constructor for component, calls to this component should pass in a classId param (i.e. /class/:id)
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             classId: this.props.classId,
             user: this.props.user,
