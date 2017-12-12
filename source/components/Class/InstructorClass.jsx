@@ -91,8 +91,7 @@ class InstructorClass extends Component {
     }
 
     toggleSession = () => {
-        let active = this.state.active
-        console.log('toggling');
+        let active = this.state.active;
         let component = this;
         let _url = _CONFIG.devURL + (active ? "/end-class" : "/start-class");
         axios.post(_url, {course: this.state.classId, user: this.state.user})
@@ -114,7 +113,6 @@ class InstructorClass extends Component {
                 </div>
             )
         }
-        console.log(this.state.additionalOptions);
         let sortBy = this.state.sortColumn;
         let currentDirection = this.state.direction;
         return(

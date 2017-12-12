@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Header, Container, Button, TextArea, Table } from 'semantic-ui-react'
 import _ from 'lodash'
 
+import axios from 'axios'
 import styles from './Class.scss'
 import * as _CONFIG from '../_config/Config.js'
 
@@ -47,8 +48,18 @@ class StudentClass extends Component {
 
     askQuestion = (event) => {
         event.preventDefault();
-        let question = this.state.studentQuestion;
-        this.setState({studentQuestion:""});
+        let _url = _CONFIG.devURL + "/question"
+        let component = this;
+        axios.post(_url, {
+            question: this.state.studentQuestion,
+            user: this.state.user.user,
+            course: this.state.classId
+        }).then(function(response){
+            component.setState({studentQuestion:""});
+        }).catch(function(error){
+            console.log(error);
+        })
+
     }
 
     generateQuestionRow = (questionObj, index) => {
@@ -68,7 +79,7 @@ class StudentClass extends Component {
             <div>
                 <Container className="questionSection">
                     <h3>Ask A Question</h3>
-                    <TextArea className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({question: data.value})}/>
+                    <TextArea value={this.state.studentQuestion} className="question" placeholder='Your Question Here...' autoHeight rows={3} onChange={(event,data) => this.setState({studentQuestion: data.value})}/>
                     <br></br>
                     <Button className="submit" onClick={this.askQuestion}>
                         Submit

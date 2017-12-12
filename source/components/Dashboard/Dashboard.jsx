@@ -13,6 +13,7 @@ class Dashboard extends Component {
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.location.state.user,
             classes : this.props.location.state.user.classes,
             classIds : this.props.location.state.user.course_ids,
             isActive : [],
@@ -41,11 +42,21 @@ class Dashboard extends Component {
 
     addClass(e){
         e.preventDefault();
+        let component = this;
+        let currClass = this.state.classes;
+        let currIDs = this.state.classIds;
         axios.put(_CONFIG.devURL + '/add-class', {
-            course: this.state.add_class
+            course: this.state.add_class,
+            user: this.state.user.user
           })
           .then(function (response) {
-            console.log(response);
+              console.log(response);
+              currClass.push(response.data);
+              currIDs.push(component.state.add_class);
+              component.setState({
+                  classes : currClass,
+                  classIds : currIDs
+              });
           })
           .catch(function (error) {
             console.log(error);
@@ -61,7 +72,8 @@ class Dashboard extends Component {
     createClass(e){
         e.preventDefault();
         axios.post(_CONFIG.devURL + '/create-class', {
-            course: this.state.create_class
+            course: this.state.create_class,
+            user: this.state.user
           })
           .then(function (response) {
             console.log(response);
