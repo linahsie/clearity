@@ -13,6 +13,7 @@ class Dashboard extends Component {
 
     constructor(props){
         super(props);
+        console.log(props);
         this.state = {
             user: this.props.location.state.user,
             classes : this.props.location.state.user.classes,
@@ -20,7 +21,6 @@ class Dashboard extends Component {
             isActive : [],
             add_class: '',
             create_class: '',
-            user: this.props.location.state,
             isInstructor: this.props.location.state.user.is_instructor,
             modalOpen: false
         }
@@ -58,7 +58,7 @@ class Dashboard extends Component {
         let currIDs = this.state.classIds;
         axios.put(_CONFIG.devURL + '/add-class', {
             course: this.state.add_class,
-            user: this.state.user.user
+            user: this.state.user,
           })
           .then(function (response) {
               console.log(response);
@@ -86,11 +86,12 @@ class Dashboard extends Component {
         let component = this;
         axios.post(_CONFIG.devURL + '/create-class', {
             course: this.state.create_class,
-            user: this.state.user.user
+            user: this.state.user
           })
           .then(function (response) {
             console.log(response);
             component.setState({
+                user: response.data.user,
                 classes : response.data.user.classes,
                 classIds : response.data.user.course_ids
             })
@@ -128,7 +129,7 @@ class Dashboard extends Component {
             activeText = "Offline"
             joinButton = <Button disabled={!active} fluid>Join</Button>
         }
-        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.props.location.state.user, classId: this.state.classIds[index], isActive: active}}}>
+        return( <Link key={index} to={{pathname:"/class", state:{title: item, user: this.state.user, classId: this.state.classIds[index], isActive: active}}}>
         <Card className="card-element">
             <Card.Content>
               <Card.Description textAlign="right">
